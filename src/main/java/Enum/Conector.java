@@ -19,4 +19,8 @@ public enum Conector {
         this.simbolo= simbolo;
     }
     
+    //getter
+    public String getSimbolo(){
+        return simbolo;
+    }
 }

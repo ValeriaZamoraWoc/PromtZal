@@ -9,7 +9,7 @@ package Enum;
  * @author cacerola
  */
 public enum Directivas {
-     modelo("modelo"), rol("rol"), formato("formato");
+    MODELO("@modelo"), ROL("@rol"), FORMATO("@formato");
      
      private final String simbolo;
      

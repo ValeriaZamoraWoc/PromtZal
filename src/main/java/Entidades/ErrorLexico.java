@@ -8,13 +8,13 @@ package Entidades;
  *
  * @author cacerola
  */
-public class Error {
+public class ErrorLexico {
     
-    char lexema;
+    String lexema;
     int fila, columna;
     String descripcion;
     
-    Error(char c, int fila, int columna){
+    ErrorLexico(String c, int fila, int columna){
         this.lexema=c;    
         this.fila = fila;
         this.columna= columna;

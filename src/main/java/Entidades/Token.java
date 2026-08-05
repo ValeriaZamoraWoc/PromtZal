@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Entidades;
-import Entidades.TipoToken;
+import Enum.TipoToken;
 
 /**
  *
@@ -11,17 +11,29 @@ import Entidades.TipoToken;
  */
 public class Token {
     
-    char lexema;
+    String lexema;
     TipoToken tipo;
     int fila, columna;
     
-    Token(char c, int fila, int columna, TipoToken tipo){
-        this.lexema=c;    
-        this.fila = fila;
+    //setters
+    public void setLexema(String lexema){
+        this.lexema = lexema;
+    }
+    
+    public void setFila(int fila){
+        this.fila= fila;
+    }
+    
+    public void setColumna(int columna){
         this.columna= columna;
-        this.tipo= tipo;
+    }
+    
+    public void setTipo(TipoToken tipo){
+        this.tipo = tipo;
     }
     
     //getters
-    
+    public Token getToken(){
+        return this;
+    }
 }

@@ -11,14 +11,11 @@ package Enum;
 public enum Operador {
     //falta definir correctamente
     
-    IGUAL("="), CONCATENAR("+"), CADENA, ENTERO, DECIMAL, ANALISTA, COMENTARIO_LINEA, COMENTARIO_LARGO;
+    IGUAL("="), CONCATENAR("+");
     
     private final String simbolo;
     
     Operador(String simbolo){
         this.simbolo = simbolo;
-    }
-    Operador(){
-        this.simbolo= null;
     }
 }
