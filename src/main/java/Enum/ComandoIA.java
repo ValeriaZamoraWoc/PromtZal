@@ -10,5 +10,25 @@ package Enum;
  */
 public enum ComandoIA {
    
-    PREGUNTAR, GENERAR, RESUMIR, ANALIZAR, TRADUCIR, CLASIFICAR, EXTRAER
+    PREGUNTAR, GENERAR, RESUMIR, ANALIZAR, TRADUCIR, CLASIFICAR, EXTRAER;
+    
+    public static boolean esComandoIA(String identificador){
+        if(identificador == null)return false;
+        
+        for (ComandoIA cia : ComandoIA.values()) {
+            if(cia.name().equals(identificador)){
+                return true;
+            }  
+        }
+        return false;
+    }
+    
+    public static String getComandoIALexema(String identificador){
+        for (ComandoIA cia : ComandoIA.values()) {
+            if(cia.name().equals(identificador)){
+                return cia.name();
+            }  
+        }
+        return null;
+    }
 }

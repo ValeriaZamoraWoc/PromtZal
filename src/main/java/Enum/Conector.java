@@ -13,6 +13,15 @@ public enum Conector {
     
     private final String simbolo;
     
+    public static boolean esConector(String identificador){
+        if(identificador == null) return false;
+        for (Conector c : Conector.values()) {
+            if(c.getSimbolo().equals(identificador)){
+                return true;
+            }
+        }
+        return false;
+    }
     
     //constructor
     Conector(String simbolo){
@@ -20,7 +29,17 @@ public enum Conector {
     }
     
     //getter
-    public String getSimbolo(){
+    private String getSimbolo(){
         return simbolo;
+    }
+    
+    public static String getConectorLexema(String identificador){
+        if(identificador == null) return null;
+        for (Conector c : Conector.values()) {
+            if(c.getSimbolo().equals(identificador)){
+                return c.name();
+            }
+        }
+        return null;
     }
 }

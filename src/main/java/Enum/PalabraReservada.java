@@ -10,4 +10,26 @@ package Enum;
  */
 public enum PalabraReservada {
     AGENTE, contexto, variable, EJECUTAR, EXPORTAR;
+    
+    public static boolean esPalabraReservada(String identificador){
+        if(identificador == null)return false;
+        
+        for (PalabraReservada cia : PalabraReservada.values()) {
+            if(cia.name().equals(identificador)){
+                return true;
+            }  
+        }
+        return false;
+    }
+    
+    public static String getPalabraReservadaLexema(String identificador){
+        if(identificador == null)return null;
+        
+        for (PalabraReservada cia : PalabraReservada.values()) {
+            if(cia.name().equals(identificador)){
+                return cia.name();
+            }  
+        }
+        return null;
+    }
 }

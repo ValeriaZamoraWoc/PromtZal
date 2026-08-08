@@ -14,7 +14,7 @@ public class ErrorLexico {
     int fila, columna;
     String descripcion;
     
-    ErrorLexico(String c, int fila, int columna){
+    public ErrorLexico(String c, int fila, int columna){
         this.lexema=c;    
         this.fila = fila;
         this.columna= columna;
