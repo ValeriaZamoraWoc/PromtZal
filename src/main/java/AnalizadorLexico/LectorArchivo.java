@@ -16,6 +16,7 @@ import java.io.IOException;
  */
 public class LectorArchivo {
 
+    private String nombreArchivo;
     public String leerArchivo() {
         StringBuilder texto = new StringBuilder();
         JFileChooser buscador = new JFileChooser();
@@ -28,6 +29,8 @@ public class LectorArchivo {
         if (resultado == JFileChooser.APPROVE_OPTION) {
             
             File archivoSeleccionado = buscador.getSelectedFile();
+            nombreArchivo= archivoSeleccionado.getName();
+            System.out.println("Leyendo "+nombreArchivo+" ...");
 
             try (FileReader fr = new FileReader(archivoSeleccionado);
                  BufferedReader br = new BufferedReader(fr)) {
@@ -48,4 +51,9 @@ public class LectorArchivo {
         }
         return texto.toString();
     }
+
+    public String getNombreArchivo() {
+        return nombreArchivo;
+    }
+    
 }

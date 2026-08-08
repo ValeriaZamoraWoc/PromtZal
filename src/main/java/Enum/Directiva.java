@@ -39,7 +39,7 @@ public enum Directiva {
         
         for (Directiva d : Directiva.values()) {
             if(d.getSimbolo().equals(identificador)){
-                return d.name();
+                return d.getSimbolo();
             }
             
         }

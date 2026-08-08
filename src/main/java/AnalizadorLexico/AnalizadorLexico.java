@@ -57,7 +57,7 @@ public class AnalizadorLexico {
                     
                     indice++; 
                     columna++;
-                    c= columna;
+                    c= columna; 
                     leerCadena(c);
                 }
                 //inicio comentario
@@ -162,7 +162,7 @@ public class AnalizadorLexico {
             agregarToken(TipoToken.IDENTIFICADOR, identificador,fila,c);
         }
         else{
-            agregarError(identificador, fila, c);
+            agregarError(identificador,"Identificador no válido, uso de caracteres inválidos", fila, c);
         }
         //sale del método y vuelve al while del analizador
     }
@@ -210,7 +210,7 @@ public class AnalizadorLexico {
                 }
                 indice++;
             }
-            agregarError(comentario, fila, c);
+            agregarError(comentario,"Comentario inválido", fila, c);
             return;
         }
         
@@ -231,13 +231,12 @@ public class AnalizadorLexico {
 
                 if (entrada.charAt(indice) == '*' && (indice + 1) < entrada.length() && entrada.charAt(indice + 1) == '/') {
                     comentario += "*/";
-                    indice += 2; // Consumimos el '*' y el '/'
+                    indice += 2; 
                     columna += 2;
                     cerrado = true;
-                    break; // Cerramos con éxito
+                    break;
                 }
 
-                // Si no es el cierre, acumulamos el carácter
                 comentario += entrada.charAt(indice);
 
                 if (entrada.charAt(indice) == '\n') {
@@ -249,10 +248,8 @@ public class AnalizadorLexico {
                 indice++;
             }
 
-            // 🔴 PARCHE: Si llegó al final del texto y NUNCA se cerró el comentario
             if (!cerrado) {
-                agregarError("Comentario multilínea no cerrado al final del archivo", filaInicio, c);
-                return;
+                agregarError("Comentario no cerrado","Comentario multilínea no cerrado al final del archivo", filaInicio, c);
             }
         }
         //agregarToken(TipoToken.COMENTARIO, comentario, filaInicio,c);
@@ -275,12 +272,12 @@ public class AnalizadorLexico {
         }
 
         if(b || puntos >1){
-            agregarError(identificador,fila,c);
+            agregarError(identificador,"Número no válido",fila,c);
             return;
         }
         if(identificador.contains(".")){
             if((identificador.startsWith(".") || identificador.endsWith(".")) || (identificador.startsWith(".") && identificador.endsWith("."))){
-                agregarError(identificador, fila, c);
+                agregarError(identificador,"Puntos en posiciones erróneas", fila, c);
                 return;
             }
             
@@ -298,7 +295,7 @@ public class AnalizadorLexico {
             indice++;
             columna++;
             if(indice == entrada.length()){
-                agregarError(cadena, fila, c);
+                agregarError(cadena,"Cadena no finalizada" ,fila, c);
                 return;
             }
             if(entrada.charAt(indice)== '\n'){
@@ -319,8 +316,8 @@ public class AnalizadorLexico {
         columna++;
     }
     
-    private void agregarError(String lexema, int fila, int columna){
-        ErrorLexico error = new ErrorLexico(lexema, fila, columna);
+    private void agregarError(String lexema,String descripcion, int fila, int columna){
+        ErrorLexico error = new ErrorLexico(lexema, descripcion, fila, columna);
         
         erroresLexicos.add(error);
     }
@@ -334,4 +331,14 @@ public class AnalizadorLexico {
         
         tokens.add(token);
     }
+    
+    //getters de tokens y errores
+    public List<Token> getTokens(){
+        return tokens;
+    }
+    
+    public List<ErrorLexico> getErrores(){
+        return erroresLexicos;
+    }
+    
 }

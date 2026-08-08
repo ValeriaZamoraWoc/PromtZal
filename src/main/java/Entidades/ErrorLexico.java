@@ -14,13 +14,32 @@ public class ErrorLexico {
     int fila, columna;
     String descripcion;
     
-    public ErrorLexico(String c, int fila, int columna){
+    public ErrorLexico(String c,String descripcion, int fila, int columna){
         this.lexema=c;    
+        this.descripcion= descripcion;
         this.fila = fila;
         this.columna= columna;
     }
     
     public String getError(){
-        return "Error léxico en fila: "+ fila+ " columna: "+columna;
+        return "Error léxico: '"+lexema+"' descripcion: '"+descripcion+"' en fila: "+ fila+ " columna: "+columna;
     }
+
+    public String getLexema() {
+        return lexema;
+    }
+
+    public int getFila() {
+        return fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+    
+    
 }

@@ -27,9 +27,13 @@ public enum PalabraReservada {
         
         for (PalabraReservada cia : PalabraReservada.values()) {
             if(cia.name().equals(identificador)){
-                return cia.name();
+                return cia.getSimbolo();
             }  
         }
         return null;
+    }
+    
+    private String getSimbolo(){
+        return this.name();
     }
 }

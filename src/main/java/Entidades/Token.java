@@ -23,7 +23,7 @@ public class Token {
     public void setFila(int fila){
         this.fila= fila;
     }
-    
+
     public void setColumna(int columna){
         this.columna= columna;
     }
@@ -35,5 +35,21 @@ public class Token {
     //getters
     public Token getToken(){
         return this;
+    }
+    
+    public String getLexema() {
+        return lexema;
+    }
+
+    public TipoToken getTipo() {
+        return tipo;
+    }
+
+    public int getFila() {
+        return fila;
+    }
+
+    public int getColumna() {
+        return columna;
     }
 }

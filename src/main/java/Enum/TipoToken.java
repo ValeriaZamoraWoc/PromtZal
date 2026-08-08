@@ -22,4 +22,8 @@ public enum TipoToken {
         }
         return null;
     }
+    
+    private String getSimbolo(){
+        return this.name();
+    }
 }

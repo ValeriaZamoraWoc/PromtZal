@@ -37,7 +37,7 @@ public enum Conector {
         if(identificador == null) return null;
         for (Conector c : Conector.values()) {
             if(c.getSimbolo().equals(identificador)){
-                return c.name();
+                return c.getSimbolo();
             }
         }
         return null;
