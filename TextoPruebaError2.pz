@@ -1,0 +1,81 @@
+@modelo "claude-sonnet-4-6"
+@rol "ingeniero de software"
+@formato "markdown"
+
+/* =========================================================
+   PRUEBA DE FUEGO DEL ANALIZADOR LÉXICO
+   ========================================================= */
+
+AGENTE _analista2026 {
+    contexto = "Eres un analista experto en datos, código y documentación"
+
+    variable ventas_2026 = CARGAR("ventas.csv")
+    variable archivo_datos = CARGAR("datos_01.json")
+
+    // Comandos de IA y conectores
+    PREGUNTAR "Cuales son las 3 tendencias principales?" SOBRE ventas_2026 -> tendencias
+    GENERAR codigo DESDE "una funcion que procese los datos" + tendencias -> script
+    RESUMIR tendencias EN 100 palabras -> resumen
+    ANALIZAR ventas_2026 SOBRE "errores y valores atipicos" -> analisis
+    TRADUCIR resumen EN "ingles" -> traduccion
+    CLASIFICAR ventas_2026 EN "alto, medio, bajo" -> categorias
+    EXTRAER datos SOBRE "nombres y cantidades" -> informacion
+
+    variable entero = 100
+    variable decimal = 0.75
+    variable otro_decimal = 123.456
+
+    contexto = "Cadena con numeros 123 y simbolos + = { } ( ) ,"
+
+    /* -----------------------------------------------------
+       Comentario de bloque
+       con varias lineas
+       y diferentes caracteres: + = -> @
+       ----------------------------------------------------- */
+
+    variable _privado = "identificador con guion bajo"
+    variable dato123 = "identificador con numeros"
+}
+
+EJECUTAR _analista2026
+EXPORTAR resumen, script, analisis, traduccion, categorias, informacion
+
+
+/************************************************************
+                     ERRORES INTENCIONALES
+ ************************************************************/
+
+AGENTE 123abc {
+    // ERROR: identificador iniciado con numero
+
+    variable mi-variable = 25
+    // ERROR: identificador con '-'
+
+    variable dato$invalido = 10
+    // ERROR: caracter '$'
+
+    variable numero_malo = 12.34.56
+    // ERROR: mas de un punto
+
+    variable decimal_malo = .75
+    // ERROR: decimal iniciado con punto
+
+    variable decimal_malo2 = 75.
+    // ERROR: decimal terminado en punto
+
+    variable caracter_malo = hola?
+    // ERROR: caracter '?'
+
+    contexto = "Esta cadena si esta cerrada"
+
+    @directivaInexistente "prueba"
+    // ERROR: directiva inexistente
+
+    comandoInexistente datos -> resultado
+    // ERROR: lexema desconocido
+
+    variable numeroInvalido = 123abc
+    // ERROR: mezcla de numero e identificador
+
+    contexto = "Esta cadena NO esta cerrada...
+    // ERROR: cadena sin cerrar

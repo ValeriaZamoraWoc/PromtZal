@@ -8,6 +8,7 @@ import AnalizadorLexico.AnalizadorLexico;
 import AnalizadorLexico.LectorArchivo;
 import Reporte.GeneradorConsola;
 import Reporte.GeneradorHTML;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,11 +49,15 @@ public class Ventana {
         ghtml.setNombreArchivo(lector.getNombreArchivo());
         if(lexer.getTokens() == null){
             System.out.println("Error, tokens es nula");
+            JOptionPane.showMessageDialog(null, "No se ha procesado ningún archivo");
         }
         else if(lexer.getTokens().isEmpty()){
             System.out.println("No hay datos a procesar");
+                        JOptionPane.showMessageDialog(null, "No se ha procesado ningún archivo");
+
         }else{
             ghtml.generarHTMLTokens(lexer.getTokens());
+            JOptionPane.showMessageDialog(null, "Se ha generado un archivo HTML de Tokens");
         }
         ghtml.setNombreArchivo("");
     }
@@ -61,11 +66,16 @@ public class Ventana {
         ghtml.setNombreArchivo(lector.getNombreArchivo());
         if(lexer.getErrores() == null){
             System.out.println("Error, errores es nula");
+                        JOptionPane.showMessageDialog(null, "No se ha procesado ningún archivo");
+
         }
         else if(lexer.getErrores().isEmpty()){
             System.out.println("No hay datos a procesar");
+                        JOptionPane.showMessageDialog(null, "No se ha procesado ningún archivo");
+
         }else{
-            ghtml.generarHTMLErrores(lexer.getErrores());            
+            ghtml.generarHTMLErrores(lexer.getErrores());       
+            JOptionPane.showMessageDialog(null, "No se ha procesado ningún archivo");
         }
         ghtml.setNombreArchivo("");
     }

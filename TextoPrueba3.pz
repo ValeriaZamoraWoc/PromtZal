@@ -1,0 +1,31 @@
+@modelo "claude-sonnet-4-6"
+@rol "desarrollador de software"
+@formato "markdown"
+
+AGENTE analista_datos {
+    contexto = "Eres un experto en analisis de informacion"
+
+    variable datos_ventas = CARGAR("ventas_2026.csv")
+    variable datos_clientes = CARGAR("clientes.json")
+
+    PREGUNTAR "Cuales son los productos mas vendidos?" SOBRE datos_ventas -> productos
+    ANALIZAR datos_ventas SOBRE "ventas mensuales" -> tendencias
+    GENERAR reporte DESDE "un reporte detallado" + productos -> documento
+    RESUMIR tendencias EN 250 palabras -> resumen
+
+    variable cantidad = 1500
+    variable promedio = 98.75
+    variable porcentaje = 0.625
+
+    contexto = "Los resultados contienen 1500 registros y un promedio de 98.75"
+
+    /* Comentario de bloque
+       con varias lineas.
+       El lexer debe ignorarlo completamente.
+    */
+
+    variable _resultado_final = "Analisis terminado"
+}
+
+EJECUTAR analista_datos
+EXPORTAR resumen, documento, _resultado_final

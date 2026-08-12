@@ -1,0 +1,4 @@
+AGENTE 123abc {
+    variable mi-variable = 12.5.7
+    contexto = "sin cerrar
+}
