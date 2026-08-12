@@ -75,7 +75,7 @@ public class Ventana {
 
         }else{
             ghtml.generarHTMLErrores(lexer.getErrores());       
-            JOptionPane.showMessageDialog(null, "No se ha procesado ningún archivo");
+            JOptionPane.showMessageDialog(null, "Se ha procesado un archivo HTML de Errores");
         }
         ghtml.setNombreArchivo("");
     }
