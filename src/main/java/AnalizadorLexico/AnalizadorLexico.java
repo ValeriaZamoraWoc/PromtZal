@@ -9,7 +9,6 @@ import Entidades.Token;
 import Enum.ComandoIA;
 import Enum.Conector;
 import Enum.Directiva;
-import Enum.Operador;
 import Enum.PalabraReservada;
 import Enum.TipoToken;
 import java.util.ArrayList;
@@ -199,7 +198,7 @@ public class AnalizadorLexico {
         }
         
         //comentario no válido
-        if(entrada.charAt(indice)!= '/' || entrada.charAt(indice)!= '*'){
+        if(entrada.charAt(indice)!= '/' && entrada.charAt(indice)!= '*'){
             while(indice < entrada.length() && !esSeparador(entrada.charAt(indice))){
                 comentario+= entrada.charAt(indice); 
                 if(entrada.charAt(indice)== '\n'){
