@@ -5,6 +5,7 @@
 package UI;
 
 import AnalizadorLexico.AnalizadorLexico;
+import AnalizadorLexico.AnalizadorLexicoAFD;
 import AnalizadorLexico.LectorArchivo;
 import Reporte.GeneradorConsola;
 import Reporte.GeneradorHTML;
@@ -15,13 +16,13 @@ import javax.swing.JOptionPane;
  * @author cacerola
  */
 public class Ventana {
-    private AnalizadorLexico lexer;
+    private AnalizadorLexicoAFD lexer;
     private LectorArchivo lector;
     private GeneradorConsola gc;
     private GeneradorHTML ghtml;
     
     public Ventana(){
-        this.lexer = new AnalizadorLexico();
+        this.lexer = new AnalizadorLexicoAFD();
         this.lector = new LectorArchivo();
         this.gc = new GeneradorConsola();
         this.ghtml = new GeneradorHTML();

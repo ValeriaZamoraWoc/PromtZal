@@ -21,7 +21,7 @@ public class Estado {
         return nombre;
     }
 
-    public boolean isAceptacion() {
+    public boolean esAceptacion() {
         return aceptacion;
     }
 }
