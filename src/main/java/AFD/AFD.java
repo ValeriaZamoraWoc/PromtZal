@@ -41,6 +41,7 @@ public class AFD {
         Estado qDIRECTIVA= new Estado("qDIRECTIVA", true);
         Estado qFINCOMENTARIO = new Estado("qFINCOMENTARIO", true);
         Estado qFINCADENA = new Estado("qFINCADENA", true);
+        Estado qFLECHA = new Estado("qFLECHA", true);
 
         //estados normales
         Estado q0 = new Estado("q0", false);
@@ -50,6 +51,7 @@ public class AFD {
         Estado qASTERISCO= new Estado("qASTERISCO", false);
         Estado qCOMCORTO= new Estado("qCOMCORTO", false);
         Estado qCOMLARGO= new Estado("qCOMLARGO", false);
+        Estado qGUION = new Estado("qGUION", false);
         
         //agregar estados
         estados.add(q0);
@@ -65,6 +67,8 @@ public class AFD {
         estados.add(qCOMLARGO);
         estados.add(qFINCOMENTARIO);
         estados.add(qFINCADENA);
+        estados.add(qGUION);
+        estados.add(qFLECHA);
         
         //transiciones q0
         transiciones.add(new Transicion(q0, q0, "+"));
@@ -73,6 +77,10 @@ public class AFD {
         transiciones.add(new Transicion(q0, q0, "}"));
         transiciones.add(new Transicion(q0, q0, "("));
         transiciones.add(new Transicion(q0, q0, ")"));
+        
+        //transiciones qFLECHA
+        transiciones.add(new Transicion(q0, qGUION, "-"));
+        transiciones.add(new Transicion(qGUION, qFLECHA, ">"));
         
         //transiciones qID
         transiciones.add(new Transicion(q0, qID, "LETRA"));
@@ -89,7 +97,7 @@ public class AFD {
         //'' CADENA
         char comilla = '"';
         transiciones.add(new Transicion(q0, qCADENA, String.valueOf(comilla)));
-        transiciones.add(new Transicion(qCADENA, qCADENA, "ANY"));
+        transiciones.add(new Transicion(qCADENA, qCADENA, "ANY_CADENA"));
         transiciones.add(new Transicion(qCADENA, qFINCADENA, String.valueOf(comilla)));
         
         // '' NUMERO
@@ -161,6 +169,15 @@ public class AFD {
             case"_"->{
                 return c== '_';
             }
+            case"-"->{
+                return c== '-';
+            }
+            case","->{
+                return c== ',';
+            }
+            case">"->{
+                return c== '>';
+            }
             case"+"->{
                 return c== '+';
             }
@@ -196,6 +213,9 @@ public class AFD {
             }
             case"ANY"->{
                 return true;
+            }
+            case"ANY_CADENA"->{
+                return c != '\n' && c != '"';
             }
             default->{
                 return false;

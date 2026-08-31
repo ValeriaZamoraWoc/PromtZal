@@ -74,7 +74,20 @@ public class AnalizadorLexicoAFD {
             }else{
                 //si es nulo (no existe transicion) verifica si el estado actual es de aceptacion
                 if(estadoActual.esAceptacion()){
-                    determinarToken(estadoActual.getNombre(), lexema, colTemporal);
+                    //mira si no es un número mal escrito
+                    if((estadoActual.getNombre().equals("qINT")|| estadoActual.getNombre().equals("qDOB"))&& !esSeparador(c)){
+                        String error = obtenerLexemaInvalido(lexema,c);
+                        agregarError(error,"Número mal escrito",fila,colTemporal);
+                        /*indice++;
+                        columna++;*/
+                    }else if(estadoActual.getNombre().equals("qID")&& !esSeparador(c)){
+                        String error = obtenerLexemaInvalido(lexema,c);
+                        agregarError(error,"Identificador no valido",fila,colTemporal);
+                        /*indice++;
+                        columna++;*/
+                    }else{
+                        determinarToken(estadoActual.getNombre(),lexema,colTemporal);
+                    }
                 }
                 //si vuelve a q0, busca si es + o =
                 else if(estadoActual == afd.getEstadoInicial()){
@@ -82,7 +95,6 @@ public class AnalizadorLexicoAFD {
                         // Caracteres que se pueden ignorar
                         if(Character.isWhitespace(c)){
                             indice++;
-
                             if(c == '\n'){
                                 fila++;
                                 columna = 1;
@@ -99,9 +111,10 @@ public class AnalizadorLexicoAFD {
                         }
                         // Cualquier otro carácter es un error
                         else{
-                            agregarError(String.valueOf(c),"Carácter no reconocido",fila,columna);
-                            indice++;
-                            columna++;
+                            String error = obtenerLexemaInvalido(lexema,c);
+                            agregarError(error,"Carácter no reconocido",fila,columna);
+                            /*indice++;
+                            columna++;*/
                             continue;
                         }
                         
@@ -109,7 +122,7 @@ public class AnalizadorLexicoAFD {
                         agregarToken(TipoToken.OPERADOR, "+", fila,columna);
                     }else if(lexema.equals("=")){
                         agregarToken(TipoToken.OPERADOR, "=", fila,columna);
-                    }else if(!(lexema.equals("{")||lexema.equals("}")||lexema.equals("(")||lexema.equals(")"))){
+                    }else if(!(lexema.equals("{")||lexema.equals("}")||lexema.equals("(")||lexema.equals(")")||lexema.equals(","))){
                         agregarError(lexema,"Carácter no reconocido",fila,colTemporal);
                     }
                 }
@@ -118,6 +131,11 @@ public class AnalizadorLexicoAFD {
                     determinarError(estadoActual.getNombre(), lexema, colTemporal);
                 }
                 lexema="";
+                estadoActual = afd.getEstadoInicial();
+            }
+            //evita que, al estar al lado de otra transicion correcta, lo absorba
+            if(c == '{' || c == '}' || c == '(' || c == ')'){
+                lexema ="";
                 estadoActual = afd.getEstadoInicial();
             }
         }
@@ -139,6 +157,20 @@ public class AnalizadorLexicoAFD {
                 );
             }
         }
+    }
+    
+    private boolean esSeparador(char c){
+        return Character.isWhitespace(c)
+                || c == '{'
+                || c == '}'
+                || c == '('
+                || c == ')'
+                || c == '+'
+                || c == '='
+                || c == '"'
+                || c == '/'
+                || c == ';'
+                || c == ',';
     }
     
     private void determinarToken(String nombreEstado, String lexema, int columna){
@@ -186,6 +218,8 @@ public class AnalizadorLexicoAFD {
             }
             case "qCOMCORTO"->{
                 agregarError(lexema, "Comentario corto no finalizado", fila, columna);
+            }case "qCADENA"->{
+                agregarError(lexema, "Cadena no cerrada correctamente", fila, columna);
             }
         }
     }
@@ -236,6 +270,24 @@ public class AnalizadorLexicoAFD {
         return true;
     }//ya
 
+    private String obtenerLexemaInvalido(String lexemaInicial, char c){
+        String invalido = lexemaInicial+c;
+        indice++;
+        columna++;
+        
+        while(indice < entrada.length()){
+            char e = entrada.charAt(indice);
+            if(esSeparador(e)){
+               break; 
+            }
+            invalido += e;
+            indice ++;
+            columna++;
+        }
+        
+        return invalido;
+    }
+    
     /*
     *
     *
