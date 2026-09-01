@@ -4,7 +4,7 @@
 
 package General;
 
-import UI.VentanaUI;
+import UI.VentanaUI2;
 
 /**
  *
@@ -12,9 +12,9 @@ import UI.VentanaUI;
  */
 public class Main {
 
-    static VentanaUI ventana = new VentanaUI();
+    static VentanaUI2 prueba = new VentanaUI2();
     
     public static void main(String[] args) {
-        ventana.show();
+        prueba.show();
     }
 }
