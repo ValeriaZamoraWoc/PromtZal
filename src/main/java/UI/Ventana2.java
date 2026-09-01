@@ -6,9 +6,12 @@ package UI;
 
 import AnalizadorLexico.AnalizadorLexicoAFD;
 import AnalizadorLexico.LectorArchivo;
+import Entidades.ErrorLexico;
+import Entidades.Token;
 import Reporte.GeneradorAnalisis;
 import Reporte.GeneradorConsola;
 import Reporte.GeneradorHTML;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,16 +21,12 @@ import javax.swing.JOptionPane;
 public class Ventana2 {
     private AnalizadorLexicoAFD lexer;
     private LectorArchivo lector;
-    private GeneradorConsola gc;
     private GeneradorHTML ghtml;
-    private GeneradorAnalisis ga;
     
     public Ventana2(){
         this.lexer = new AnalizadorLexicoAFD();
         this.lector = new LectorArchivo();
-        this.gc = new GeneradorConsola();
         this.ghtml = new GeneradorHTML();
-        this.ga= new GeneradorAnalisis();
     }
     
     public String obtenerArchivoCargado(){
@@ -35,27 +34,27 @@ public class Ventana2 {
         return archivoLeido;
     }
     
-    public String[] procesarArchivo(String archivoLeido){
-        String[] resultados = new String[2];
-     
+    public boolean procesarArchivo(String archivoLeido){     
         lexer.analizarTexto(archivoLeido);
         
         if(lexer.getTokens() == null){
-            resultados[0]= ("Error, tokens es nula");
+            return false;
         }else if(lexer.getErrores() == null){
-            resultados[1]=("Error, errores es nula");
+            return false;
         }
         else if(lexer.getTokens().isEmpty() && lexer.getErrores().isEmpty()){
-            resultados[0]= ("No hay datos a procesar");
-            resultados[1]= "No hay datos a procesar";
+            return false;
         }else{
-            gc.imprimirTokensConsola(lexer.getTokens());
-            gc.imprimirErroresConsola(lexer.getErrores());
-            
-            resultados[0] =ga.obtenerTokens(lexer.getTokens());
-            resultados[1] = ga.obtenerErrores(lexer.getErrores());
+            return true;
         }
-        return resultados;
+    }
+    
+    public List<Token> obtenerTokens(){
+        return this.lexer.getTokens();
+    }
+    
+    public List<ErrorLexico> obtenerErrores(){
+        return this.lexer.getErrores();
     }
     
     public void generarHTMLToken(){

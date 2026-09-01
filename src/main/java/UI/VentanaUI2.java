@@ -4,12 +4,16 @@
  */
 package UI;
 
+import Entidades.ErrorLexico;
+import Entidades.Token;
 import UI.*;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
@@ -1037,7 +1041,7 @@ public class VentanaUI2 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(121, 121, 121)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 59, Short.MAX_VALUE))
+                .addGap(25, 579, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1064,14 +1068,20 @@ public class VentanaUI2 extends javax.swing.JFrame {
     
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         //ventana.procesarArchivo();
+        boolean b = ventana.procesarArchivo(this.txtEditor.getText());
+        if(!b){
+            JOptionPane.showMessageDialog(null, "No hay datos a procesar");
+        }else{
+            agregarDatosTablas(ventana.obtenerTokens(),ventana.obtenerErrores());
+        }
     }
     
     private void btnExportarTokensActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        //ventana.procesarArchivo();
+        ventana.generarHTMLToken();
     }
     
     private void btnExportarErroresActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        //ventana.procesarArchivo();
+        ventana.generarHTMLError();
     }
     
     public static void main(String args[]) {
@@ -1099,127 +1109,145 @@ public class VentanaUI2 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
     // End of variables declaration//GEN-END:variables
+    
+    private void agregarDatosTablas(List<Token> tokens, List<ErrorLexico> errores){
 
-
-private static class BordeRedondeado extends javax.swing.border.AbstractBorder {
-
-    private final java.awt.Color color;
-    private final int radio;
-    private final int grosor;
-
-    public BordeRedondeado(java.awt.Color color, int radio, int grosor) {
-        this.color = color;
-        this.radio = radio;
-        this.grosor = grosor;
+        javax.swing.table.DefaultTableModel modeloToken =(javax.swing.table.DefaultTableModel)tablaTokens.getModel();
+        javax.swing.table.DefaultTableModel modeloError =(javax.swing.table.DefaultTableModel)tablaErrores.getModel();
+        
+        modeloToken.setRowCount(0);
+        modeloError.setRowCount(0);
+        
+        for (int i = 0; i < tokens.size()-1; i++) {
+            Token t= tokens.get(i);
+            modeloToken.addRow(new Object[] {i+1,t.getLexema(),t.getTipo(), t.getFila(),t.getColumna()}); 
+        }
+        
+        for (int i = 0; i < errores.size()-1; i++) {
+            ErrorLexico e= errores.get(i);
+            modeloError.addRow(new Object[] {i+1,e.getLexema(),e.getDescripcion(), e.getFila(),e.getColumna()}); 
+        }
     }
 
-    @Override
-    public void paintBorder(
-            java.awt.Component c,
-            java.awt.Graphics g,
-            int x,
-            int y,
-            int width,
-            int height) {
+    private static class BordeRedondeado extends javax.swing.border.AbstractBorder {
 
-        java.awt.Graphics2D g2 =
-                (java.awt.Graphics2D) g.create();
+        private final java.awt.Color color;
+        private final int radio;
+        private final int grosor;
 
-        g2.setRenderingHint(
-                java.awt.RenderingHints.KEY_ANTIALIASING,
-                java.awt.RenderingHints.VALUE_ANTIALIAS_ON
-        );
+        public BordeRedondeado(java.awt.Color color, int radio, int grosor) {
+            this.color = color;
+            this.radio = radio;
+            this.grosor = grosor;
+        }
 
-        g2.setColor(color);
+        @Override
+        public void paintBorder(
+                java.awt.Component c,
+                java.awt.Graphics g,
+                int x,
+                int y,
+                int width,
+                int height) {
 
-        g2.setStroke(
-                new java.awt.BasicStroke(grosor)
-        );
+            java.awt.Graphics2D g2 =
+                    (java.awt.Graphics2D) g.create();
 
-        g2.drawRoundRect(
-                x + grosor / 2,
-                y + grosor / 2,
-                width - grosor,
-                height - grosor,
-                radio,
-                radio
-        );
+            g2.setRenderingHint(
+                    java.awt.RenderingHints.KEY_ANTIALIASING,
+                    java.awt.RenderingHints.VALUE_ANTIALIAS_ON
+            );
 
-        g2.dispose();
+            g2.setColor(color);
+
+            g2.setStroke(
+                    new java.awt.BasicStroke(grosor)
+            );
+
+            g2.drawRoundRect(
+                    x + grosor / 2,
+                    y + grosor / 2,
+                    width - grosor,
+                    height - grosor,
+                    radio,
+                    radio
+            );
+
+            g2.dispose();
+        }
+
+        @Override
+        public java.awt.Insets getBorderInsets(
+                java.awt.Component c) {
+
+            return new java.awt.Insets(
+                    8,
+                    8,
+                    8,
+                    8
+            );
+        }
     }
 
-    @Override
-    public java.awt.Insets getBorderInsets(
-            java.awt.Component c) {
+    private static class PanelCute extends javax.swing.JPanel {
 
-        return new java.awt.Insets(
-                8,
-                8,
-                8,
-                8
-        );
+        private final java.awt.Color fondo;
+        private final java.awt.Color borde;
+
+        public PanelCute(
+                java.awt.Color fondo,
+                java.awt.Color borde) {
+
+            this.fondo = fondo;
+            this.borde = borde;
+
+            setOpaque(false);
+
+            setBorder(
+                    javax.swing.BorderFactory.createCompoundBorder(
+                            new BordeRedondeado(
+                                    borde,
+                                    28,
+                                    2
+                            ),
+                            javax.swing.BorderFactory.createEmptyBorder(
+                                    12,
+                                    12,
+                                    12,
+                                    12
+                            )
+                    )
+            );
+        }
+
+        @Override
+        protected void paintComponent(
+                java.awt.Graphics g) {
+
+            java.awt.Graphics2D g2 =
+                    (java.awt.Graphics2D) g.create();
+
+            g2.setRenderingHint(
+                    java.awt.RenderingHints.KEY_ANTIALIASING,
+                    java.awt.RenderingHints.VALUE_ANTIALIAS_ON
+            );
+
+            // Fondo redondeado
+            g2.setColor(fondo);
+
+            g2.fillRoundRect(
+                    0,
+                    0,
+                    getWidth(),
+                    getHeight(),
+                    28,
+                    28
+            );
+
+            g2.dispose();
+
+            super.paintComponent(g);
+        }
     }
-}
-
-private static class PanelCute extends javax.swing.JPanel {
-
-    private final java.awt.Color fondo;
-    private final java.awt.Color borde;
-
-    public PanelCute(
-            java.awt.Color fondo,
-            java.awt.Color borde) {
-
-        this.fondo = fondo;
-        this.borde = borde;
-
-        setOpaque(false);
-
-        setBorder(
-                javax.swing.BorderFactory.createCompoundBorder(
-                        new BordeRedondeado(
-                                borde,
-                                28,
-                                2
-                        ),
-                        javax.swing.BorderFactory.createEmptyBorder(
-                                12,
-                                12,
-                                12,
-                                12
-                        )
-                )
-        );
-    }
-
-    @Override
-    protected void paintComponent(
-            java.awt.Graphics g) {
-
-        java.awt.Graphics2D g2 =
-                (java.awt.Graphics2D) g.create();
-
-        g2.setRenderingHint(
-                java.awt.RenderingHints.KEY_ANTIALIASING,
-                java.awt.RenderingHints.VALUE_ANTIALIAS_ON
-        );
-
-        // Fondo redondeado
-        g2.setColor(fondo);
-
-        g2.fillRoundRect(
-                0,
-                0,
-                getWidth(),
-                getHeight(),
-                28,
-                28
-        );
-
-        g2.dispose();
-
-        super.paintComponent(g);
-    }
-}
 
 }
