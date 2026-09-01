@@ -6,6 +6,7 @@ package UI;
 
 import AnalizadorLexico.AnalizadorLexicoAFD;
 import AnalizadorLexico.LectorArchivo;
+import Reporte.GeneradorAnalisis;
 import Reporte.GeneradorConsola;
 import Reporte.GeneradorHTML;
 import javax.swing.JOptionPane;
@@ -19,29 +20,42 @@ public class Ventana2 {
     private LectorArchivo lector;
     private GeneradorConsola gc;
     private GeneradorHTML ghtml;
+    private GeneradorAnalisis ga;
     
     public Ventana2(){
         this.lexer = new AnalizadorLexicoAFD();
         this.lector = new LectorArchivo();
         this.gc = new GeneradorConsola();
         this.ghtml = new GeneradorHTML();
+        this.ga= new GeneradorAnalisis();
     }
     
-    public void procesarArchivo(){
+    public String obtenerArchivoCargado(){
         String archivoLeido = lector.leerArchivo();
+        return archivoLeido;
+    }
+    
+    public String[] procesarArchivo(String archivoLeido){
+        String[] resultados = new String[2];
+     
         lexer.analizarTexto(archivoLeido);
         
         if(lexer.getTokens() == null){
-            System.out.println("Error, tokens es nula");
+            resultados[0]= ("Error, tokens es nula");
         }else if(lexer.getErrores() == null){
-            System.out.println("Error, errores es nula");
+            resultados[1]=("Error, errores es nula");
         }
         else if(lexer.getTokens().isEmpty() && lexer.getErrores().isEmpty()){
-            System.out.println("No hay datos a procesar");
+            resultados[0]= ("No hay datos a procesar");
+            resultados[1]= "No hay datos a procesar";
         }else{
             gc.imprimirTokensConsola(lexer.getTokens());
             gc.imprimirErroresConsola(lexer.getErrores());
+            
+            resultados[0] =ga.obtenerTokens(lexer.getTokens());
+            resultados[1] = ga.obtenerErrores(lexer.getErrores());
         }
+        return resultados;
     }
     
     public void generarHTMLToken(){

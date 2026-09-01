@@ -5,6 +5,13 @@
 package UI;
 
 import UI.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -15,7 +22,30 @@ public class VentanaUI2 extends javax.swing.JFrame {
     private javax.swing.JPanel panelEditor;
     private javax.swing.JPanel panelTokens;
     private javax.swing.JPanel panelErrores;
+    
+    private JScrollPane jScrollPane1;
+    private JTextArea txtEditor ;
 
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaTokens;
+
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tablaErrores;
+
+    private JButton btnAnalizar = new javax.swing.JButton();
+    private JButton btnExportarTokens = new javax.swing.JButton();
+    private JButton btnExportarErrores = new javax.swing.JButton();
+
+    private JLabel jLabel1 = new javax.swing.JLabel();
+    private JLabel jLabel2 = new javax.swing.JLabel();
+    private JLabel jLabel3 = new javax.swing.JLabel();
+    private JMenuBar jMenuBar1 = new javax.swing.JMenuBar();
+    private JMenu jMenu1 = new javax.swing.JMenu();
+    private JMenuItem jMenuItem1 = new javax.swing.JMenuItem();
+    private JMenuItem jMenuItem2 = new javax.swing.JMenuItem();
+    private JMenu jMenu2 = new javax.swing.JMenu();
+    
+    
     private Ventana2 ventana = new Ventana2();
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VentanaUI2.class.getName());
@@ -30,235 +60,310 @@ public class VentanaUI2 extends javax.swing.JFrame {
     }
 
 
-private void aplicarEstiloSoftCute() {
+    private void aplicarEstiloSoftCute() {
 
-    java.awt.Color bgVentana =
-            new java.awt.Color(0x32, 0x2E, 0x2B);
+        java.awt.Color bgVentana =
+                new java.awt.Color(0x32, 0x2E, 0x2B);
 
-    java.awt.Color bgCampos =
-            new java.awt.Color(0x40, 0x3B, 0x37);
+        java.awt.Color bgCampos =
+                new java.awt.Color(0x40, 0x3B, 0x37);
 
-    java.awt.Color rosa =
-            new java.awt.Color(0xF0, 0xA8, 0xA9);
+        java.awt.Color rosa =
+                new java.awt.Color(0xF0, 0xA8, 0xA9);
 
-    java.awt.Color rosaHover =
-            new java.awt.Color(0xB8, 0x79, 0x7A);
+        java.awt.Color rosaHover =
+                new java.awt.Color(0xB8, 0x79, 0x7A);
 
-    java.awt.Color azul =
-            new java.awt.Color(0x9A, 0xC4, 0xD7);
+        java.awt.Color azul =
+                new java.awt.Color(0x9A, 0xC4, 0xD7);
 
-    java.awt.Color azulHover =
-            new java.awt.Color(0x78, 0x9F, 0xB1);
+        java.awt.Color azulHover =
+                new java.awt.Color(0x78, 0x9F, 0xB1);
 
-    java.awt.Color texto =
-            new java.awt.Color(0xEE, 0xE4, 0xDB);
+        java.awt.Color texto =
+                new java.awt.Color(0xEE, 0xE4, 0xDB);
 
-    java.awt.Color borde =
-            new java.awt.Color(0xD8, 0xC8, 0xBD);
+        java.awt.Color borde =
+                new java.awt.Color(0xD8, 0xC8, 0xBD);
 
-    java.awt.Font titulo =
-            new java.awt.Font(
-                    "Segoe UI Round",
-                    java.awt.Font.BOLD,
-                    20
-            );
+        java.awt.Font titulo =
+                new java.awt.Font(
+                        "Segoe UI Round",
+                        java.awt.Font.BOLD,
+                        20
+                );
 
-    java.awt.Font textoEditor =
-            new java.awt.Font(
-                    "Consolas",
-                    java.awt.Font.PLAIN,
-                    13
-            );
+        java.awt.Font textoEditor =
+                new java.awt.Font(
+                        "Consolas",
+                        java.awt.Font.PLAIN,
+                        13
+                );
 
-    java.awt.Font botonPrincipal =
-            new java.awt.Font(
-                    "Segoe UI Round",
-                    java.awt.Font.BOLD,
-                    15
-            );
+        java.awt.Font botonPrincipal =
+                new java.awt.Font(
+                        "Segoe UI Round",
+                        java.awt.Font.BOLD,
+                        15
+                );
 
-    java.awt.Font botonSecundario =
-            new java.awt.Font(
-                    "Segoe UI Round",
-                    java.awt.Font.BOLD,
-                    13
-            );
+        java.awt.Font botonSecundario =
+                new java.awt.Font(
+                        "Segoe UI Round",
+                        java.awt.Font.BOLD,
+                        13
+                );
 
-    getContentPane().setBackground(bgVentana);
+        getContentPane().setBackground(bgVentana);
 
-    jLabel1.setText("✿ Editor de Código");
-    jLabel1.setFont(titulo);
-    jLabel1.setForeground(rosa);
+        jLabel1.setText("✿ Editor de Código");
+        jLabel1.setFont(titulo);
+        jLabel1.setForeground(rosa);
 
-    jLabel2.setText("★ Tokens Encontrados");
-    jLabel2.setFont(titulo);
-    jLabel2.setForeground(azul);
+        jLabel2.setText("★ Tokens Encontrados");
+        jLabel2.setFont(titulo);
+        jLabel2.setForeground(azul);
 
-    jLabel3.setText("✖ Errores Detectados");
-    jLabel3.setFont(titulo);
-    jLabel3.setForeground(rosa);
+        jLabel3.setText("✖ Errores Detectados");
+        jLabel3.setFont(titulo);
+        jLabel3.setForeground(rosa);
 
-    txtEditor.setFont(textoEditor);
-    txtEditor.setBackground(bgCampos);
-    txtEditor.setForeground(texto);
-    txtEditor.setCaretColor(rosa);
-    txtEditor.setBorder(
-            javax.swing.BorderFactory.createEmptyBorder(
-                    12, 14, 12, 14
-            )
-    );
+        txtEditor.setFont(textoEditor);
+        txtEditor.setBackground(bgCampos);
+        txtEditor.setForeground(texto);
+        txtEditor.setCaretColor(rosa);
+        txtEditor.setBorder(
+                javax.swing.BorderFactory.createEmptyBorder(
+                        12, 14, 12, 14
+                )
+        );
 
-    txtTokens.setFont(textoEditor);
-    txtTokens.setBackground(bgCampos);
-    txtTokens.setForeground(texto);
-    txtTokens.setBorder(
-            javax.swing.BorderFactory.createEmptyBorder(
-                    12, 14, 12, 14
-            )
-    );
+        
+        tablaTokens.setFont(
+                new java.awt.Font(
+                        "Segoe UI",
+                        java.awt.Font.PLAIN,
+                        13
+                )
+        );
 
-    txtErrores.setFont(textoEditor);
-    txtErrores.setBackground(bgCampos);
-    txtErrores.setForeground(texto);
-    txtErrores.setBorder(
-            javax.swing.BorderFactory.createEmptyBorder(
-                    12, 14, 12, 14
-            )
-    );
+        tablaTokens.setBackground(bgCampos);
+        tablaTokens.setForeground(texto);
+        tablaTokens.setSelectionBackground(
+                new java.awt.Color(0x5A, 0x54, 0x50)
+        );
+        tablaTokens.setSelectionForeground(texto);
+        tablaTokens.setRowHeight(30);
 
-    jScrollPane1.setBackground(bgCampos);
-    jScrollPane1.getViewport().setBackground(bgCampos);
+        tablaTokens.getTableHeader().setFont(
+                new java.awt.Font(
+                        "Segoe UI Round",
+                        java.awt.Font.BOLD,
+                        13
+                )
+        );
 
-    jScrollPane2.setBackground(bgCampos);
-    jScrollPane2.getViewport().setBackground(bgCampos);
+        tablaTokens.getTableHeader().setBackground(azul);
+        tablaTokens.getTableHeader().setForeground(bgVentana);
+        tablaTokens.getTableHeader().setPreferredSize(
+                new java.awt.Dimension(0, 36)
+        );
 
-    jScrollPane3.setBackground(bgCampos);
-    jScrollPane3.getViewport().setBackground(bgCampos);
+        tablaTokens.getTableHeader().setReorderingAllowed(false);
 
-    jScrollPane1.setBorder(
-            new BordeRedondeado(borde, 24, 2)
-    );
+        tablaTokens.setShowGrid(false);
+        tablaTokens.setIntercellSpacing(
+                new java.awt.Dimension(0, 0)
+        );
 
-    jScrollPane2.setBorder(
-            new BordeRedondeado(azul, 24, 2)
-    );
+        tablaTokens.setFillsViewportHeight(true);
 
-    jScrollPane3.setBorder(
-            new BordeRedondeado(rosa, 24, 2)
-    );
+        tablaErrores.setFont(
+                new java.awt.Font(
+                        "Segoe UI",
+                        java.awt.Font.PLAIN,
+                        13
+                )
+        );
 
-    btnAnalizar.setFont(botonPrincipal);
-    btnAnalizar.setText("✨ Analizar Texto ✨");
-    btnAnalizar.setBackground(rosa);
-    btnAnalizar.setForeground(bgVentana);
-    btnAnalizar.setFocusPainted(false);
-    btnAnalizar.setBorderPainted(false);
-    btnAnalizar.setCursor(
-            new java.awt.Cursor(
-                    java.awt.Cursor.HAND_CURSOR
-            )
-    );
+        tablaErrores.setBackground(bgCampos);
+        tablaErrores.setForeground(texto);
+        tablaErrores.setSelectionBackground(
+                new java.awt.Color(0x5A, 0x54, 0x50)
+        );
+        tablaErrores.setSelectionForeground(texto);
+        tablaErrores.setRowHeight(30);
 
-    btnAnalizar.putClientProperty(
-            "Component.arc",
-            40
-    );
+        tablaErrores.getTableHeader().setFont(
+                new java.awt.Font(
+                        "Segoe UI Round",
+                        java.awt.Font.BOLD,
+                        13
+                )
+        );
 
-    btnAnalizar.putClientProperty(
-            "Button.hoverBackground",
-            rosaHover
-    );
+        tablaErrores.getTableHeader().setBackground(rosa);
+        tablaErrores.getTableHeader().setForeground(bgVentana);
+        tablaErrores.getTableHeader().setPreferredSize(
+                new java.awt.Dimension(0, 36)
+        );
 
-    btnAnalizar.putClientProperty(
-            "Button.borderWidth",
-            0
-    );
+        tablaErrores.getTableHeader().setReorderingAllowed(false);
 
-    btnExportarTokens.setFont(botonSecundario);
-    btnExportarTokens.setText(
-            "🌐 Exportar Tokens a HTML"
-    );
-    btnExportarTokens.setBackground(azul);
-    btnExportarTokens.setForeground(bgVentana);
-    btnExportarTokens.setFocusPainted(false);
-    btnExportarTokens.setBorderPainted(false);
-    btnExportarTokens.setCursor(
-            new java.awt.Cursor(
-                    java.awt.Cursor.HAND_CURSOR
-            )
-    );
+        tablaErrores.setShowGrid(false);
+        tablaErrores.setIntercellSpacing(
+                new java.awt.Dimension(0, 0)
+        );
 
-    btnExportarTokens.putClientProperty(
-            "Component.arc",
-            40
-    );
+        tablaErrores.setFillsViewportHeight(true);
 
-    btnExportarTokens.putClientProperty(
-            "Button.hoverBackground",
-            azulHover
-    );
+        jScrollPane2.setBackground(bgCampos);
+        jScrollPane2.getViewport().setBackground(bgCampos);
 
-    btnExportarTokens.putClientProperty(
-            "Button.borderWidth",
-            0
-    );
+        jScrollPane3.setBackground(bgCampos);
+        jScrollPane3.getViewport().setBackground(bgCampos);
 
-    btnExportarErrores.setFont(botonSecundario);
-    btnExportarErrores.setText(
-            "🌐 Exportar Errores a HTML"
-    );
-    btnExportarErrores.setBackground(rosa);
-    btnExportarErrores.setForeground(bgVentana);
-    btnExportarErrores.setFocusPainted(false);
-    btnExportarErrores.setBorderPainted(false);
-    btnExportarErrores.setCursor(
-            new java.awt.Cursor(
-                    java.awt.Cursor.HAND_CURSOR
-            )
-    );
+        jScrollPane2.setBorder(
+                new BordeRedondeado(azul, 24, 2)
+        );
 
-    btnExportarErrores.putClientProperty(
-            "Component.arc",
-            40
-    );
+        jScrollPane3.setBorder(
+                new BordeRedondeado(rosa, 24, 2)
+        );
 
-    btnExportarErrores.putClientProperty(
-            "Button.hoverBackground",
-            rosaHover
-    );
 
-    btnExportarErrores.putClientProperty(
-            "Button.borderWidth",
-            0
-    );
+        jScrollPane1.setBackground(bgCampos);
+        jScrollPane1.getViewport().setBackground(bgCampos);
 
-    jMenuBar1.setBackground(bgVentana);
-    jMenuBar1.setBorder(
-            javax.swing.BorderFactory.createMatteBorder(
-                    0, 0, 1, 0, borde
-            )
-    );
+        jScrollPane2.setBackground(bgCampos);
+        jScrollPane2.getViewport().setBackground(bgCampos);
 
-    jMenu1.setText("📂 Archivo");
-    jMenu1.setForeground(texto);
+        jScrollPane3.setBackground(bgCampos);
+        jScrollPane3.getViewport().setBackground(bgCampos);
 
-    jMenu2.setText("✏️ Editar");
-    jMenu2.setForeground(texto);
+        jScrollPane1.setBorder(
+                new BordeRedondeado(borde, 24, 2)
+        );
 
-    jMenuItem1.setText("📄 Abrir");
-    jMenuItem2.setText("💾 Guardar");
-}
+        jScrollPane2.setBorder(
+                new BordeRedondeado(azul, 24, 2)
+        );
+
+        jScrollPane3.setBorder(
+                new BordeRedondeado(rosa, 24, 2)
+        );
+
+        btnAnalizar.setFont(botonPrincipal);
+        btnAnalizar.setText("✨ Analizar Texto ✨");
+        btnAnalizar.setBackground(rosa);
+        btnAnalizar.setForeground(bgVentana);
+        btnAnalizar.setFocusPainted(false);
+        btnAnalizar.setBorderPainted(false);
+        btnAnalizar.setCursor(
+                new java.awt.Cursor(
+                        java.awt.Cursor.HAND_CURSOR
+                )
+        );
+
+        btnAnalizar.putClientProperty(
+                "Component.arc",
+                40
+        );
+
+        btnAnalizar.putClientProperty(
+                "Button.hoverBackground",
+                rosaHover
+        );
+
+        btnAnalizar.putClientProperty(
+                "Button.borderWidth",
+                0
+        );
+
+        btnExportarTokens.setFont(botonSecundario);
+        btnExportarTokens.setText(
+                "🌐 Exportar Tokens a HTML"
+        );
+        btnExportarTokens.setBackground(azul);
+        btnExportarTokens.setForeground(bgVentana);
+        btnExportarTokens.setFocusPainted(false);
+        btnExportarTokens.setBorderPainted(false);
+        btnExportarTokens.setCursor(
+                new java.awt.Cursor(
+                        java.awt.Cursor.HAND_CURSOR
+                )
+        );
+
+        btnExportarTokens.putClientProperty(
+                "Component.arc",
+                40
+        );
+
+        btnExportarTokens.putClientProperty(
+                "Button.hoverBackground",
+                azulHover
+        );
+
+        btnExportarTokens.putClientProperty(
+                "Button.borderWidth",
+                0
+        );
+
+        btnExportarErrores.setFont(botonSecundario);
+        btnExportarErrores.setText(
+                "🌐 Exportar Errores a HTML"
+        );
+        btnExportarErrores.setBackground(rosa);
+        btnExportarErrores.setForeground(bgVentana);
+        btnExportarErrores.setFocusPainted(false);
+        btnExportarErrores.setBorderPainted(false);
+        btnExportarErrores.setCursor(
+                new java.awt.Cursor(
+                        java.awt.Cursor.HAND_CURSOR
+                )
+        );
+
+        btnExportarErrores.putClientProperty(
+                "Component.arc",
+                40
+        );
+
+        btnExportarErrores.putClientProperty(
+                "Button.hoverBackground",
+                rosaHover
+        );
+
+        btnExportarErrores.putClientProperty(
+                "Button.borderWidth",
+                0
+        );
+
+        jMenuBar1.setBackground(bgVentana);
+        jMenuBar1.setBorder(
+                javax.swing.BorderFactory.createMatteBorder(
+                        0, 0, 1, 0, borde
+                )
+        );
+
+        jMenu1.setText("📂 Archivo");
+        jMenu1.setForeground(texto);
+
+        jMenu2.setText("✏️ Editar");
+        jMenu2.setForeground(texto);
+
+        jMenuItem1.setText("📄 Abrir");
+        jMenuItem2.setText("💾 Guardar");
+    }
 
     private void initComponents2() {
-
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtEditor = new javax.swing.JTextArea();
-
+        txtEditor= new javax.swing.JTextArea();
+        
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtTokens = new javax.swing.JTextArea();
+        tablaTokens = new javax.swing.JTable();
 
         jScrollPane3 = new javax.swing.JScrollPane();
-        txtErrores = new javax.swing.JTextArea();
+        tablaErrores = new javax.swing.JTable();
 
         btnAnalizar = new javax.swing.JButton();
         btnExportarTokens = new javax.swing.JButton();
@@ -267,6 +372,11 @@ private void aplicarEstiloSoftCute() {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         panelEditor = new PanelCute(
                     new java.awt.Color(0x3A, 0x34, 0x31),
@@ -283,11 +393,7 @@ private void aplicarEstiloSoftCute() {
                     new java.awt.Color(0xE7, 0xB0, 0xB2)
             );
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        
 
 
         // =========================================================
@@ -313,22 +419,56 @@ private void aplicarEstiloSoftCute() {
         // TOKENS
         // =========================================================
 
-        txtTokens.setEditable(false);
-        txtTokens.setColumns(20);
-        txtTokens.setRows(5);
+        tablaTokens.setModel(
+            new javax.swing.table.DefaultTableModel(
+                new Object[][] {},
+                new String[] {
+                    "#", "Lexema", "Tipo", "Fila", "Columna"
+                }
+            ) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            }
+        );
 
-        jScrollPane2.setViewportView(txtTokens);
+        tablaTokens.setRowHeight(30);
+        tablaTokens.setShowGrid(false);
+        tablaTokens.setIntercellSpacing(
+            new java.awt.Dimension(0, 0)
+        );
+        tablaTokens.getTableHeader().setReorderingAllowed(false);
+
+        jScrollPane2.setViewportView(tablaTokens);
 
 
         // =========================================================
         // ERRORES
         // =========================================================
 
-        txtErrores.setEditable(false);
-        txtErrores.setColumns(20);
-        txtErrores.setRows(5);
+        tablaErrores.setModel(
+            new javax.swing.table.DefaultTableModel(
+                new Object[][] {},
+                new String[] {
+                    "#", "Lexema", "Descripción", "Fila", "Columna"
+                }
+            ) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            }
+        );
 
-        jScrollPane3.setViewportView(txtErrores);
+        tablaErrores.setRowHeight(30);
+        tablaErrores.setShowGrid(false);
+        tablaErrores.setIntercellSpacing(
+            new java.awt.Dimension(0, 0)
+        );
+        tablaErrores.getTableHeader().setReorderingAllowed(false);
+
+        jScrollPane3.setViewportView(tablaErrores);
 
     // =========================================================
     // PANEL EDITOR
@@ -510,7 +650,7 @@ private void aplicarEstiloSoftCute() {
                 public void actionPerformed(
                         java.awt.event.ActionEvent evt) {
 
-                    jMenuItem1ActionPerformed(evt);
+                    btnAnalizarActionPerformed(evt);
                 }
             }
         );
@@ -523,7 +663,7 @@ private void aplicarEstiloSoftCute() {
                 public void actionPerformed(
                         java.awt.event.ActionEvent evt) {
 
-                    jMenuItem1ActionPerformed(evt);
+                   btnExportarTokensActionPerformed(evt);
                 }
             }
         );
@@ -536,7 +676,7 @@ private void aplicarEstiloSoftCute() {
                 public void actionPerformed(
                         java.awt.event.ActionEvent evt) {
 
-                    jMenuItem1ActionPerformed(evt);
+                        btnExportarErroresActionPerformed(evt);
                 }
             }
         );
@@ -886,124 +1026,25 @@ private void aplicarEstiloSoftCute() {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtEditor = new javax.swing.JTextArea();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtTokens = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        txtErrores = new javax.swing.JTextArea();
-        btnAnalizar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        btnExportarTokens = new javax.swing.JButton();
-        btnExportarErrores = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        txtEditor.setColumns(20);
-        txtEditor.setRows(5);
-        jScrollPane1.setViewportView(txtEditor);
-
-        txtTokens.setEditable(false);
-        txtTokens.setColumns(20);
-        txtTokens.setRows(5);
-        jScrollPane2.setViewportView(txtTokens);
-
-        txtErrores.setEditable(false);
-        txtErrores.setColumns(20);
-        txtErrores.setRows(5);
-        jScrollPane3.setViewportView(txtErrores);
-
-        btnAnalizar.setText("Analizar Texto");
-
-        jLabel1.setText("jLabel1");
-
-        jLabel2.setText("Tokens:");
-
-        jLabel3.setText("Errores: ");
-
-        btnExportarTokens.setText("jButton1");
-
-        btnExportarErrores.setText("jButton2");
-
-        jMenu1.setText("Archivo");
-
-        jMenuItem1.setText("Abrir");
-        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
-        jMenu1.add(jMenuItem1);
-
-        jMenuItem2.setText("Guardar");
-        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
-        jMenu1.add(jMenuItem2);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 781, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3))
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(btnExportarTokens)
-                    .addComponent(btnExportarErrores))
-                .addGap(25, 25, 25))
+                .addGap(121, 121, 121)
+                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnExportarTokens)
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExportarErrores))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAnalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(755, 755, 755)
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1011,13 +1052,27 @@ private void aplicarEstiloSoftCute() {
 
     
     //abrir archivo
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        ventana.procesarArchivo();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        ventana.procesarArchivo();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        String archivoCargado= ventana.obtenerArchivoCargado();
+        ventana.procesarArchivo(archivoCargado);
+        this.txtEditor.setText(archivoCargado);
+    }                                          
+   
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+       // ventana.procesarArchivo();
+    }                                          
+    
+    private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        //ventana.procesarArchivo();
+    }
+    
+    private void btnExportarTokensActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        //ventana.procesarArchivo();
+    }
+    
+    private void btnExportarErroresActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        //ventana.procesarArchivo();
+    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1042,24 +1097,7 @@ private void aplicarEstiloSoftCute() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnalizar;
-    private javax.swing.JButton btnExportarErrores;
-    private javax.swing.JButton btnExportarTokens;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea txtEditor;
-    private javax.swing.JTextArea txtErrores;
-    private javax.swing.JTextArea txtTokens;
     // End of variables declaration//GEN-END:variables
 
 
