@@ -1058,7 +1058,7 @@ public class VentanaUI2 extends javax.swing.JFrame {
     //abrir archivo
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String archivoCargado= ventana.obtenerArchivoCargado();
-        ventana.procesarArchivo(archivoCargado);
+        //ventana.procesarArchivo(archivoCargado);
         this.txtEditor.setText(archivoCargado);
     }                                          
    
@@ -1118,12 +1118,12 @@ public class VentanaUI2 extends javax.swing.JFrame {
         modeloToken.setRowCount(0);
         modeloError.setRowCount(0);
         
-        for (int i = 0; i < tokens.size()-1; i++) {
+        for (int i = 0; i < tokens.size(); i++) {
             Token t= tokens.get(i);
             modeloToken.addRow(new Object[] {i+1,t.getLexema(),t.getTipo(), t.getFila(),t.getColumna()}); 
         }
         
-        for (int i = 0; i < errores.size()-1; i++) {
+        for (int i = 0; i < errores.size(); i++) {
             ErrorLexico e= errores.get(i);
             modeloError.addRow(new Object[] {i+1,e.getLexema(),e.getDescripcion(), e.getFila(),e.getColumna()}); 
         }

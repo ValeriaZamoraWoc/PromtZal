@@ -144,17 +144,9 @@ public class AnalizadorLexicoAFD {
         if (!lexema.isEmpty()) {
 
             if (estadoActual.esAceptacion()) {
-                determinarToken(
-                    estadoActual.getNombre(),
-                    lexema,
-                    colTemporal
-                );
+                determinarToken(estadoActual.getNombre(),lexema,colTemporal);
             } else {
-                determinarError(
-                    estadoActual.getNombre(),
-                    lexema,
-                    colTemporal
-                );
+                determinarError(estadoActual.getNombre(),lexema,colTemporal);
             }
         }
     }

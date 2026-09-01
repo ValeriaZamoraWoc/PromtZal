@@ -8,8 +8,6 @@ import AnalizadorLexico.AnalizadorLexicoAFD;
 import AnalizadorLexico.LectorArchivo;
 import Entidades.ErrorLexico;
 import Entidades.Token;
-import Reporte.GeneradorAnalisis;
-import Reporte.GeneradorConsola;
 import Reporte.GeneradorHTML;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -37,16 +35,10 @@ public class Ventana2 {
     public boolean procesarArchivo(String archivoLeido){     
         lexer.analizarTexto(archivoLeido);
         
-        if(lexer.getTokens() == null){
-            return false;
-        }else if(lexer.getErrores() == null){
+        if(lexer.getTokens() == null|| lexer.getErrores()== null){
             return false;
         }
-        else if(lexer.getTokens().isEmpty() && lexer.getErrores().isEmpty()){
-            return false;
-        }else{
-            return true;
-        }
+        return true;
     }
     
     public List<Token> obtenerTokens(){
