@@ -120,15 +120,15 @@ public class VentanaUI2 extends javax.swing.JFrame {
 
         getContentPane().setBackground(bgVentana);
 
-        jLabel1.setText("✿ Editor de Código");
+        jLabel1.setText("Editor");
         jLabel1.setFont(titulo);
         jLabel1.setForeground(rosa);
 
-        jLabel2.setText("★ Tokens Encontrados");
+        jLabel2.setText("Tokens encontrados");
         jLabel2.setFont(titulo);
         jLabel2.setForeground(azul);
 
-        jLabel3.setText("✖ Errores Detectados");
+        jLabel3.setText("Errores Detectados");
         jLabel3.setFont(titulo);
         jLabel3.setForeground(rosa);
 
@@ -689,17 +689,11 @@ public class VentanaUI2 extends javax.swing.JFrame {
         // TÍTULOS
         // =========================================================
 
-        jLabel1.setText(
-                "Editor de Código"
-        );
+        jLabel1.setText("Editor");
 
-        jLabel2.setText(
-                "Tokens:"
-        );
+        jLabel2.setText("Tokens encontrados:");
 
-        jLabel3.setText(
-                "Errores:"
-        );
+        jLabel3.setText("Errores encontrados:");
 
 
         // =========================================================

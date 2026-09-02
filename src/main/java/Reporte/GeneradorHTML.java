@@ -26,7 +26,6 @@ public class GeneradorHTML {
         this.nombreArchivo = nombreArchivo;
     }
 
-    
     public void generarHTMLTokens(List<Token> tokens) {
 
         StringBuilder html = new StringBuilder();
@@ -39,143 +38,30 @@ public class GeneradorHTML {
         html.append("<title>Reporte de Tokens</title>");
 
         html.append("<style>");
-
-        html.append("* {");
-        html.append("    box-sizing: border-box;");
-        html.append("    margin: 0;");
-        html.append("    padding: 0;");
-        html.append("}");
-
-        html.append("body {");
-        html.append("    font-family: 'Segoe UI', Arial, sans-serif;");
-        html.append("    background: #322E2B;");
-        html.append("    color: #EEE4DB;");
-        html.append("    min-height: 100vh;");
-        html.append("    padding: 40px;");
-        html.append("}");
-
-        html.append(".contenedor {");
-        html.append("    max-width: 1200px;");
-        html.append("    margin: auto;");
-        html.append("}");
-
-        html.append(".encabezado {");
-        html.append("    background: #3A3431;");
-        html.append("    border: 1px solid #9AC4D7;");
-        html.append("    border-radius: 24px;");
-        html.append("    padding: 30px 35px;");
-        html.append("    margin-bottom: 25px;");
-        html.append("    box-shadow: 0 8px 25px rgba(0,0,0,0.25);");
-        html.append("}");
-
-        html.append(".encabezado h1 {");
-        html.append("    color: #9AC4D7;");
-        html.append("    font-size: 30px;");
-        html.append("    margin-bottom: 8px;");
-        html.append("}");
-
-        html.append(".encabezado p {");
-        html.append("    color: #C8BCB3;");
-        html.append("    font-size: 15px;");
-        html.append("}");
-
-        html.append(".icono {");
-        html.append("    font-size: 28px;");
-        html.append("    margin-right: 8px;");
-        html.append("}");
-
-        html.append(".tabla-contenedor {");
-        html.append("    background: #3A3431;");
-        html.append("    border: 1px solid #9AC4D7;");
-        html.append("    border-radius: 24px;");
-        html.append("    padding: 20px;");
-        html.append("    overflow-x: auto;");
-        html.append("    box-shadow: 0 8px 25px rgba(0,0,0,0.25);");
-        html.append("}");
-
-        html.append("table {");
-        html.append("    width: 100%;");
-        html.append("    border-collapse: separate;");
-        html.append("    border-spacing: 0;");
-        html.append("    overflow: hidden;");
-        html.append("}");
-
-        html.append("thead th {");
-        html.append("    background: #9AC4D7;");
-        html.append("    color: #322E2B;");
-        html.append("    font-size: 14px;");
-        html.append("    font-weight: 700;");
-        html.append("    padding: 15px 18px;");
-        html.append("    text-align: left;");
-        html.append("}");
-
-        html.append("thead th:first-child {");
-        html.append("    border-radius: 14px 0 0 0;");
-        html.append("}");
-
-        html.append("thead th:last-child {");
-        html.append("    border-radius: 0 14px 0 0;");
-        html.append("}");
-
-        html.append("tbody td {");
-        html.append("    padding: 14px 18px;");
-        html.append("    color: #EEE4DB;");
-        html.append("    background: #403B37;");
-        html.append("    border-bottom: 1px solid #504943;");
-        html.append("    font-size: 14px;");
-        html.append("}");
-
-        html.append("tbody tr:hover td {");
-        html.append("    background: #4A4541;");
-        html.append("}");
-
-        html.append("tbody tr:last-child td {");
-        html.append("    border-bottom: none;");
-        html.append("}");
-
-        html.append(".numero {");
-        html.append("    color: #9AC4D7;");
-        html.append("    font-weight: 700;");
-        html.append("    width: 60px;");
-        html.append("}");
-
-        html.append(".lexema {");
-        html.append("    color: #F0A8A9;");
-        html.append("    font-family: Consolas, monospace;");
-        html.append("}");
-
-        html.append(".tipo {");
-        html.append("    color: #9AC4D7;");
-        html.append("    font-weight: 600;");
-        html.append("}");
-
-        html.append(".posicion {");
-        html.append("    color: #C8BCB3;");
-        html.append("}");
-
-        html.append(".pie {");
-        html.append("    text-align: center;");
-        html.append("    margin-top: 25px;");
-        html.append("    color: #9D928A;");
-        html.append("    font-size: 13px;");
-        html.append("}");
-
+        html.append("* { box-sizing: border-box; margin: 0; padding: 0; }");
+        html.append("body { font-family: 'Segoe UI', Arial, sans-serif; background: #322E2B; color: #EEE4DB; padding: 30px; text-align: left; }");
+        html.append(".encabezado { margin-bottom: 20px; }");
+        html.append(".encabezado h1 { font-size: 20px; font-weight: 600; color: #9AC4D7; margin-bottom: 4px; }");
+        html.append(".encabezado p { font-size: 13px; color: #9D928A; }");
+        html.append("table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }");
+        html.append("thead th { color: #9AC4D7; padding: 8px 12px; border-bottom: 1px solid #9AC4D7; font-weight: bold; text-align: left; }");
+        html.append("tbody td { padding: 8px 12px; border-bottom: 1px solid #403B37; color: #EEE4DB; text-align: left; }");
+        html.append("tbody tr:hover td { background: #3A3431; }");
+        html.append(".numero { color: #9D928A; width: 50px; }");
+        html.append(".lexema { color: #F0A8A9; font-family: Consolas, monospace; }");
+        html.append(".tipo { color: #9AC4D7; }");
+        html.append(".posicion { color: #C8BCB3; }");
+        html.append(".pie { margin-top: 20px; color: #9D928A; font-size: 12px; text-align: left; }");
         html.append("</style>");
         html.append("</head>");
 
         html.append("<body>");
 
-        html.append("<div class='contenedor'>");
-
         html.append("<div class='encabezado'>");
-        html.append("<h1><span class='icono'>★</span>Reporte de Tokens</h1>");
-        html.append("<p>Listado de tokens identificados durante el análisis léxico.</p>");
+        html.append("<h1>Reporte de Tokens</h1>");
         html.append("</div>");
 
-        html.append("<div class='tabla-contenedor'>");
-
         html.append("<table>");
-
         html.append("<thead>");
         html.append("<tr>");
         html.append("<th>#</th>");
@@ -185,7 +71,6 @@ public class GeneradorHTML {
         html.append("<th>Columna</th>");
         html.append("</tr>");
         html.append("</thead>");
-
         html.append("<tbody>");
 
         for (int i = 0; i < tokens.size(); i++) {
@@ -219,14 +104,6 @@ public class GeneradorHTML {
 
         html.append("</tbody>");
         html.append("</table>");
-
-        html.append("</div>");
-
-        html.append("<div class='pie'>");
-        html.append("Reporte generado automáticamente por el analizador léxico.");
-        html.append("</div>");
-
-        html.append("</div>");
 
         html.append("</body>");
         html.append("</html>");
@@ -271,141 +148,30 @@ public class GeneradorHTML {
         html.append("<title>Reporte de Errores</title>");
 
         html.append("<style>");
-
-        html.append("* {");
-        html.append("    box-sizing: border-box;");
-        html.append("    margin: 0;");
-        html.append("    padding: 0;");
-        html.append("}");
-
-        html.append("body {");
-        html.append("    font-family: 'Segoe UI', Arial, sans-serif;");
-        html.append("    background: #322E2B;");
-        html.append("    color: #EEE4DB;");
-        html.append("    min-height: 100vh;");
-        html.append("    padding: 40px;");
-        html.append("}");
-
-        html.append(".contenedor {");
-        html.append("    max-width: 1200px;");
-        html.append("    margin: auto;");
-        html.append("}");
-
-        html.append(".encabezado {");
-        html.append("    background: #3A3431;");
-        html.append("    border: 1px solid #F0A8A9;");
-        html.append("    border-radius: 24px;");
-        html.append("    padding: 30px 35px;");
-        html.append("    margin-bottom: 25px;");
-        html.append("    box-shadow: 0 8px 25px rgba(0,0,0,0.25);");
-        html.append("}");
-
-        html.append(".encabezado h1 {");
-        html.append("    color: #F0A8A9;");
-        html.append("    font-size: 30px;");
-        html.append("    margin-bottom: 8px;");
-        html.append("}");
-
-        html.append(".encabezado p {");
-        html.append("    color: #C8BCB3;");
-        html.append("    font-size: 15px;");
-        html.append("}");
-
-        html.append(".icono {");
-        html.append("    font-size: 28px;");
-        html.append("    margin-right: 8px;");
-        html.append("}");
-
-        html.append(".tabla-contenedor {");
-        html.append("    background: #3A3431;");
-        html.append("    border: 1px solid #F0A8A9;");
-        html.append("    border-radius: 24px;");
-        html.append("    padding: 20px;");
-        html.append("    overflow-x: auto;");
-        html.append("    box-shadow: 0 8px 25px rgba(0,0,0,0.25);");
-        html.append("}");
-
-        html.append("table {");
-        html.append("    width: 100%;");
-        html.append("    border-collapse: separate;");
-        html.append("    border-spacing: 0;");
-        html.append("}");
-
-        html.append("thead th {");
-        html.append("    background: #F0A8A9;");
-        html.append("    color: #322E2B;");
-        html.append("    font-size: 14px;");
-        html.append("    font-weight: 700;");
-        html.append("    padding: 15px 18px;");
-        html.append("    text-align: left;");
-        html.append("}");
-
-        html.append("thead th:first-child {");
-        html.append("    border-radius: 14px 0 0 0;");
-        html.append("}");
-
-        html.append("thead th:last-child {");
-        html.append("    border-radius: 0 14px 0 0;");
-        html.append("}");
-
-        html.append("tbody td {");
-        html.append("    padding: 14px 18px;");
-        html.append("    color: #EEE4DB;");
-        html.append("    background: #403B37;");
-        html.append("    border-bottom: 1px solid #504943;");
-        html.append("    font-size: 14px;");
-        html.append("}");
-
-        html.append("tbody tr:hover td {");
-        html.append("    background: #4A4541;");
-        html.append("}");
-
-        html.append("tbody tr:last-child td {");
-        html.append("    border-bottom: none;");
-        html.append("}");
-
-        html.append(".numero {");
-        html.append("    color: #F0A8A9;");
-        html.append("    font-weight: 700;");
-        html.append("    width: 60px;");
-        html.append("}");
-
-        html.append(".lexema {");
-        html.append("    color: #9AC4D7;");
-        html.append("    font-family: Consolas, monospace;");
-        html.append("}");
-
-        html.append(".descripcion {");
-        html.append("    color: #EEE4DB;");
-        html.append("}");
-
-        html.append(".posicion {");
-        html.append("    color: #C8BCB3;");
-        html.append("}");
-
-        html.append(".pie {");
-        html.append("    text-align: center;");
-        html.append("    margin-top: 25px;");
-        html.append("    color: #9D928A;");
-        html.append("    font-size: 13px;");
-        html.append("}");
-
+        html.append("* { box-sizing: border-box; margin: 0; padding: 0; }");
+        html.append("body { font-family: 'Segoe UI', Arial, sans-serif; background: #322E2B; color: #EEE4DB; padding: 30px; text-align: left; }");
+        html.append(".encabezado { margin-bottom: 20px; }");
+        html.append(".encabezado h1 { font-size: 20px; font-weight: 600; color: #F0A8A9; margin-bottom: 4px; }");
+        html.append(".encabezado p { font-size: 13px; color: #9D928A; }");
+        html.append("table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; }");
+        html.append("thead th { color: #F0A8A9; padding: 8px 12px; border-bottom: 1px solid #F0A8A9; font-weight: bold; text-align: left; }");
+        html.append("tbody td { padding: 8px 12px; border-bottom: 1px solid #403B37; color: #EEE4DB; text-align: left; }");
+        html.append("tbody tr:hover td { background: #3A3431; }");
+        html.append(".numero { color: #9D928A; width: 50px; }");
+        html.append(".lexema { color: #9AC4D7; font-family: Consolas, monospace; }");
+        html.append(".descripcion { color: #EEE4DB; }");
+        html.append(".posicion { color: #C8BCB3; }");
+        html.append(".pie { margin-top: 20px; color: #9D928A; font-size: 12px; text-align: left; }");
         html.append("</style>");
         html.append("</head>");
 
         html.append("<body>");
 
-        html.append("<div class='contenedor'>");
-
         html.append("<div class='encabezado'>");
-        html.append("<h1><span class='icono'>✖</span>Reporte de Errores</h1>");
-        html.append("<p>Errores léxicos encontrados durante el análisis del archivo.</p>");
+        html.append("<h1>Reporte de Errores</h1>");
         html.append("</div>");
 
-        html.append("<div class='tabla-contenedor'>");
-
         html.append("<table>");
-
         html.append("<thead>");
         html.append("<tr>");
         html.append("<th>#</th>");
@@ -415,7 +181,6 @@ public class GeneradorHTML {
         html.append("<th>Columna</th>");
         html.append("</tr>");
         html.append("</thead>");
-
         html.append("<tbody>");
 
         for (int i = 0; i < errores.size(); i++) {
@@ -450,13 +215,6 @@ public class GeneradorHTML {
         html.append("</tbody>");
         html.append("</table>");
 
-        html.append("</div>");
-
-        html.append("<div class='pie'>");
-        html.append("Reporte generado automáticamente por el analizador léxico.");
-        html.append("</div>");
-
-        html.append("</div>");
 
         html.append("</body>");
         html.append("</html>");
@@ -488,6 +246,4 @@ public class GeneradorHTML {
             );
         }
     }
-
-
 }

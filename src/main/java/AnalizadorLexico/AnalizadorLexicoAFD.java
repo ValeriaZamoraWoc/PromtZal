@@ -28,6 +28,8 @@ public class AnalizadorLexicoAFD {
     private List<Token> tokens;
     private List<ErrorLexico> errores;
     private AFD afd;
+    private StringBuilder recorridoDot;
+    
     
     public AnalizadorLexicoAFD(){
         afd = new AFD();
@@ -35,6 +37,7 @@ public class AnalizadorLexicoAFD {
     }
     
     public void analizarTexto(String texto){
+        recorridoDot = new StringBuilder();
         indice =0;
         entrada = texto;
         fila= 1;
@@ -280,6 +283,12 @@ public class AnalizadorLexicoAFD {
         return invalido;
     }
     
+    private void agregarRecorrido(Transicion t){
+        if(!(t.getOrigen() == t.getDestino())){
+            String d = t.getOrigen().getNombre() +" -> "+ t.getDestino().getNombre()+" [label="+ t.getValor()+"];";
+        }
+    }
+    
     /*
     *
     *
@@ -315,4 +324,7 @@ public class AnalizadorLexicoAFD {
         return errores;
     }
  
+    public String obtenerDot(){
+        return null;
+    }
 }
