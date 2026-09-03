@@ -29,14 +29,22 @@ public class AnalizadorLexicoAFD {
     private List<ErrorLexico> errores;
     private AFD afd;
     private StringBuilder recorridoDot;
-    
+    private Integer[] contadorTokens;
     
     public AnalizadorLexicoAFD(){
         afd = new AFD();
         afd.construirAFD();
     }
+
+    public int getFila() {
+        return fila;
+    }
     
     public void analizarTexto(String texto){
+        contadorTokens = new Integer[9];
+        for (int i = 0; i < contadorTokens.length; i++) {
+            contadorTokens[i]=0;
+        }
         recorridoDot = new StringBuilder();
         indice =0;
         entrada = texto;
@@ -119,8 +127,10 @@ public class AnalizadorLexicoAFD {
                         
                     }else if(lexema.equals("+")){
                         agregarToken(TipoToken.OPERADOR, "+", fila,columna);
+                        contadorTokens[6]++;
                     }else if(lexema.equals("=")){
                         agregarToken(TipoToken.OPERADOR, "=", fila,columna);
+                        contadorTokens[6]++;
                     }else if(!(lexema.equals("{")||lexema.equals("}")||lexema.equals("(")||lexema.equals(")")||lexema.equals(","))){
                         agregarError(lexema,"Carácter no reconocido",fila,colTemporal);
                     }
@@ -145,7 +155,15 @@ public class AnalizadorLexicoAFD {
             if (estadoActual.esAceptacion()) {
                 determinarToken(estadoActual.getNombre(),lexema,colTemporal);
             } else {
+                if(lexema.equals("+")){
+                    agregarToken(TipoToken.OPERADOR, "+", fila,columna);
+                    contadorTokens[6]++;
+                }else if(lexema.equals("=")){
+                    agregarToken(TipoToken.OPERADOR, "=", fila,columna);
+                    contadorTokens[6]++;
+                }else{
                 determinarError(estadoActual.getNombre(),lexema,colTemporal);
+                }
             }
         }
     }
@@ -171,20 +189,24 @@ public class AnalizadorLexicoAFD {
             }
             case"qINT"->{
                 agregarToken(TipoToken.ENTERO, lexema, fila, columna);
+                contadorTokens[4]++;
             }
             case"qDOB"->{
                 agregarToken(TipoToken.DECIMAL, lexema, fila, columna);
+                contadorTokens[5]++;
             }
             case"qDIRECTIVA"->{
                 if(Directiva.esDirectiva(lexema)){
                     String comando = Directiva.getDirectivaLexema(lexema);
                     agregarToken(TipoToken.DIRECTIVA, comando, fila,columna);
+                    contadorTokens[0]++;
                 }else{
                     agregarError(lexema, "Directiva no válida", fila, columna);
                 }
             }
             case"qFINCADENA"->{
                 agregarToken(TipoToken.CADENA, lexema, fila,columna);
+                contadorTokens[8]++;
             }
             case"qFINCOMENTARIO"->{
                 //comentarios no generan token
@@ -220,17 +242,21 @@ public class AnalizadorLexicoAFD {
         if(ComandoIA.esComandoIA(identificador)){
             comando = ComandoIA.getComandoIALexema(identificador);
             agregarToken(TipoToken.COMANDO_IA, comando, fila,columna);
+            contadorTokens[2]++;
         }
         else if(Conector.esConector(identificador)){
             comando = Conector.getConectorLexema(identificador);
             agregarToken(TipoToken.CONECTOR, comando, fila,columna);
+            contadorTokens[3]++;
         }
         else if(PalabraReservada.esPalabraReservada(identificador)){
             comando = PalabraReservada.getPalabraReservadaLexema(identificador);
             agregarToken(TipoToken.PALABRA_RESERVADA, comando, fila,columna);
+            contadorTokens[1]++;
         }
         else if(esIdentificadorValido(identificador)){
             agregarToken(TipoToken.IDENTIFICADOR, identificador,fila,columna);
+            contadorTokens[7]++;
         }
         else{
             agregarError(identificador,"Identificador no válido, uso de caracteres inválidos", fila, columna);
@@ -322,6 +348,10 @@ public class AnalizadorLexicoAFD {
     
     public List<ErrorLexico> getErrores(){
         return errores;
+    }
+
+    public Integer[] getContadorTokens() {
+        return contadorTokens;
     }
  
     public String obtenerDot(){

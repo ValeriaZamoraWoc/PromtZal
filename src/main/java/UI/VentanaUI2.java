@@ -49,6 +49,7 @@ public class VentanaUI2 extends javax.swing.JFrame {
     private JMenuItem jMenuItem2 = new javax.swing.JMenuItem();
     private JMenu jMenu2 = new javax.swing.JMenu();
     private JButton btnGrafica;
+    private JButton btnEstadistica;
     
     private Ventana2 ventana = new Ventana2();
 
@@ -368,6 +369,32 @@ public class VentanaUI2 extends javax.swing.JFrame {
                 "Button.borderWidth",
                 0
         );
+        btnEstadistica.setFont(botonSecundario);
+        btnEstadistica.setText("Exportar estadisticas a HTML");
+        btnEstadistica.setBackground(azul);
+        btnEstadistica.setForeground(bgVentana);
+        btnEstadistica.setFocusPainted(false);
+        btnEstadistica.setBorderPainted(false);
+        btnEstadistica.setCursor(
+                new java.awt.Cursor(
+                        java.awt.Cursor.HAND_CURSOR
+                )
+        );
+
+        btnEstadistica.putClientProperty(
+                "Component.arc",
+                40
+        );
+
+        btnEstadistica.putClientProperty(
+                "Button.hoverBackground",
+                azulHover
+        );
+
+        btnEstadistica.putClientProperty(
+                "Button.borderWidth",
+                0
+        );
         
         jMenuBar1.setBackground(bgVentana);
         jMenuBar1.setBorder(
@@ -400,6 +427,7 @@ public class VentanaUI2 extends javax.swing.JFrame {
         btnExportarTokens = new javax.swing.JButton();
         btnExportarErrores = new javax.swing.JButton();
         btnGrafica = new javax.swing.JButton();
+        btnEstadistica = new javax.swing.JButton();
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -736,6 +764,15 @@ public class VentanaUI2 extends javax.swing.JFrame {
                 }
             }
         );
+        btnEstadistica.addActionListener(
+            new java.awt.event.ActionListener() {
+                public void actionPerformed(
+                        java.awt.event.ActionEvent evt) {
+
+                    btnEstadisticaActionPerformed(evt);
+                }
+            }
+        );
 
         // =========================================================
         // TÍTULOS
@@ -904,11 +941,24 @@ public class VentanaUI2 extends javax.swing.JFrame {
                             Short.MAX_VALUE
                     )
 
-                    .addComponent(
-                            btnGrafica,
-                            javax.swing.GroupLayout.DEFAULT_SIZE,
-                            javax.swing.GroupLayout.DEFAULT_SIZE,
-                            Short.MAX_VALUE
+                    .addGroup(
+                        layout.createSequentialGroup()
+
+                            .addComponent(
+                                btnGrafica,
+                                0,
+                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                Short.MAX_VALUE
+                            )
+
+                            .addGap(10)
+
+                            .addComponent(
+                                btnEstadistica,
+                                0,
+                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                Short.MAX_VALUE
+                            )
                     )
 
                         .addComponent(
@@ -1071,11 +1121,23 @@ public class VentanaUI2 extends javax.swing.JFrame {
                                         javax.swing.LayoutStyle.ComponentPlacement.UNRELATED
                                 )
 
-                                .addComponent(
+                                .addGroup(layout.createSequentialGroup()
+
+                                    .addComponent(
                                         btnGrafica,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        42,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE
+                                        0,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        Short.MAX_VALUE
+                                    )
+
+                                    .addGap(10)
+
+                                    .addComponent(
+                                        btnEstadistica,
+                                        0,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        Short.MAX_VALUE
+                                    )
                                 )
                         )
                     )
@@ -1153,6 +1215,10 @@ public class VentanaUI2 extends javax.swing.JFrame {
     
     private void btnGraficaActionPerformed(java.awt.event.ActionEvent evt) {
         ventana.generarGrafica();
+    }
+    
+    private void btnEstadisticaActionPerformed(java.awt.event.ActionEvent evt) {
+        ventana.generarHTMLEstadisticas();
     }
     
     public static void main(String args[]) {

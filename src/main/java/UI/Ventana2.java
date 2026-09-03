@@ -90,6 +90,19 @@ public class Ventana2 {
         ghtml.setNombreArchivo("");
     }
     
+    public void generarHTMLEstadisticas(){
+        ghtml.setNombreArchivo(lector.getNombreArchivo());
+        if(lexer.getContadorTokens() == null){
+            System.out.println("Error, las estadísticas son nulas");
+                        JOptionPane.showMessageDialog(null, "No se ha procesado ningún archivo");
+
+        }else{
+            ghtml.generarHTMLEstadisticas(lexer.getContadorTokens(), lexer.getTokens().size(), lexer.getFila(), lexer.getErrores().size());
+            JOptionPane.showMessageDialog(null, "Se ha procesado un archivo HTML de Estadisticas");
+        }
+        ghtml.setNombreArchivo("");
+    }
+    
     public void generarGrafica(){
         String grafica = lexer.obtenerDot();
         
