@@ -62,6 +62,8 @@ public class AnalizadorLexicoAFD {
             
             if(transicion != null){
                 //si no es nulo, se toma el nuevo estado como el actual y se acumula el lexema
+                agregarRecorrido(transicion);
+                
                 estadoActual = transicion.getDestino();
                 lexema += c;
                 
@@ -81,13 +83,9 @@ public class AnalizadorLexicoAFD {
                     if((estadoActual.getNombre().equals("qINT")|| estadoActual.getNombre().equals("qDOB"))&& !esSeparador(c)){
                         String error = obtenerLexemaInvalido(lexema,c);
                         agregarError(error,"Número mal escrito",fila,colTemporal);
-                        /*indice++;
-                        columna++;*/
                     }else if(estadoActual.getNombre().equals("qID")&& !esSeparador(c)){
                         String error = obtenerLexemaInvalido(lexema,c);
                         agregarError(error,"Identificador no valido",fila,colTemporal);
-                        /*indice++;
-                        columna++;*/
                     }else{
                         determinarToken(estadoActual.getNombre(),lexema,colTemporal);
                     }
@@ -116,8 +114,6 @@ public class AnalizadorLexicoAFD {
                         else{
                             String error = obtenerLexemaInvalido(lexema,c);
                             agregarError(error,"Carácter no reconocido",fila,columna);
-                            /*indice++;
-                            columna++;*/
                             continue;
                         }
                         
@@ -284,8 +280,12 @@ public class AnalizadorLexicoAFD {
     }
     
     private void agregarRecorrido(Transicion t){
-        if(!(t.getOrigen() == t.getDestino())){
-            String d = t.getOrigen().getNombre() +" -> "+ t.getDestino().getNombre()+" [label="+ t.getValor()+"];";
+        if(t!= null && !(t.getOrigen() == t.getDestino())){
+            String valor = t.getValor();
+            valor = valor.replace("\\", "\\\\");
+            valor = valor.replace("\"", "\\\"");
+            String d = t.getOrigen().getNombre() +" -> "+ t.getDestino().getNombre()+" [label=\""+ valor+"\"];\n";
+            recorridoDot.append(d);
         }
     }
     
@@ -325,6 +325,26 @@ public class AnalizadorLexicoAFD {
     }
  
     public String obtenerDot(){
-        return null;
+        StringBuilder dot = new StringBuilder();
+        dot.append("digraph AFD {\n");
+        dot.append("rankdir=LR;\n");
+        dot.append("node [shape=circle];\n");
+        dot.append("inicio [shape=point];\n");
+        dot.append("inicio -> q0;\n");
+
+        // Estados de aceptación
+        dot.append("qID [shape=doublecircle];\n");
+        dot.append("qINT [shape=doublecircle];\n");
+        dot.append("qDOB [shape=doublecircle];\n");
+        dot.append("qDIRECTIVA [shape=doublecircle];\n");
+        dot.append("qFINCADENA [shape=doublecircle];\n");
+        dot.append("qFINCOMENTARIO [shape=doublecircle];\n");
+        
+        dot.append(recorridoDot);
+        
+        dot.append("}");
+        System.out.println(dot);
+        
+        return dot.toString();
     }
 }

@@ -8,7 +8,10 @@ import AnalizadorLexico.AnalizadorLexicoAFD;
 import AnalizadorLexico.LectorArchivo;
 import Entidades.ErrorLexico;
 import Entidades.Token;
+import Reporte.GeneradorDOT;
 import Reporte.GeneradorHTML;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -20,11 +23,13 @@ public class Ventana2 {
     private AnalizadorLexicoAFD lexer;
     private LectorArchivo lector;
     private GeneradorHTML ghtml;
+    private GeneradorDOT gdot;
     
     public Ventana2(){
         this.lexer = new AnalizadorLexicoAFD();
         this.lector = new LectorArchivo();
         this.ghtml = new GeneradorHTML();
+        this.gdot = new GeneradorDOT();
     }
     
     public String obtenerArchivoCargado(){
@@ -51,6 +56,7 @@ public class Ventana2 {
     
     public void generarHTMLToken(){
         ghtml.setNombreArchivo(lector.getNombreArchivo());
+        
         if(lexer.getTokens() == null){
             System.out.println("Error, tokens es nula");
             JOptionPane.showMessageDialog(null, "No se ha procesado ningún archivo");
@@ -82,5 +88,30 @@ public class Ventana2 {
             JOptionPane.showMessageDialog(null, "Se ha procesado un archivo HTML de Errores");
         }
         ghtml.setNombreArchivo("");
+    }
+    
+    public void generarGrafica(){
+        String grafica = lexer.obtenerDot();
+        
+        if(grafica == null||grafica.isEmpty() || grafica.isBlank()){
+            System.out.println("Error, dot es nulo");
+                        JOptionPane.showMessageDialog(null, "No existen datos");
+        }else{
+            try {
+                gdot.generarArchivoDOT(grafica,nombreNuevo());
+            } catch (InterruptedException ex) {
+                System.getLogger(Ventana2.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            }
+        }
+    }
+    
+    private String nombreNuevo(){
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+
+        String fechaHora = LocalDateTime.now().format(formatter);
+
+        String nombreArchivoGuardar = "archivo_" + fechaHora;
+        return nombreArchivoGuardar;
     }
 }

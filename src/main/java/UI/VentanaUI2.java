@@ -48,7 +48,7 @@ public class VentanaUI2 extends javax.swing.JFrame {
     private JMenuItem jMenuItem1 = new javax.swing.JMenuItem();
     private JMenuItem jMenuItem2 = new javax.swing.JMenuItem();
     private JMenu jMenu2 = new javax.swing.JMenu();
-    
+    private JButton btnGrafica;
     
     private Ventana2 ventana = new Ventana2();
 
@@ -342,6 +342,33 @@ public class VentanaUI2 extends javax.swing.JFrame {
                 0
         );
 
+        btnGrafica.setFont(botonSecundario);
+        btnGrafica.setText("Ver Gráfica");
+        btnGrafica.setBackground(azul);
+        btnGrafica.setForeground(bgVentana);
+        btnGrafica.setFocusPainted(false);
+        btnGrafica.setBorderPainted(false);
+        btnGrafica.setCursor(
+                new java.awt.Cursor(
+                        java.awt.Cursor.HAND_CURSOR
+                )
+        );
+
+        btnGrafica.putClientProperty(
+                "Component.arc",
+                40
+        );
+
+        btnGrafica.putClientProperty(
+                "Button.hoverBackground",
+                azulHover
+        );
+
+        btnGrafica.putClientProperty(
+                "Button.borderWidth",
+                0
+        );
+        
         jMenuBar1.setBackground(bgVentana);
         jMenuBar1.setBorder(
                 javax.swing.BorderFactory.createMatteBorder(
@@ -372,6 +399,7 @@ public class VentanaUI2 extends javax.swing.JFrame {
         btnAnalizar = new javax.swing.JButton();
         btnExportarTokens = new javax.swing.JButton();
         btnExportarErrores = new javax.swing.JButton();
+        btnGrafica = new javax.swing.JButton();
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -611,6 +639,11 @@ public class VentanaUI2 extends javax.swing.JFrame {
             javax.swing.GroupLayout.DEFAULT_SIZE,
             javax.swing.GroupLayout.DEFAULT_SIZE,
             Short.MAX_VALUE
+        ).addComponent(
+            btnGrafica,
+            javax.swing.GroupLayout.DEFAULT_SIZE,
+            javax.swing.GroupLayout.DEFAULT_SIZE,
+            Short.MAX_VALUE
         )
     );
 
@@ -637,6 +670,16 @@ public class VentanaUI2 extends javax.swing.JFrame {
 
         .addComponent(
             btnExportarErrores,
+            javax.swing.GroupLayout.PREFERRED_SIZE,
+            42,
+            javax.swing.GroupLayout.PREFERRED_SIZE
+        )
+        .addPreferredGap(
+            javax.swing.LayoutStyle.ComponentPlacement.UNRELATED
+        )
+
+        .addComponent(
+            btnGrafica,
             javax.swing.GroupLayout.PREFERRED_SIZE,
             42,
             javax.swing.GroupLayout.PREFERRED_SIZE
@@ -684,6 +727,15 @@ public class VentanaUI2 extends javax.swing.JFrame {
                 }
             }
         );
+        btnGrafica.addActionListener(
+            new java.awt.event.ActionListener() {
+                public void actionPerformed(
+                        java.awt.event.ActionEvent evt) {
+
+                    btnGraficaActionPerformed(evt);
+                }
+            }
+        );
 
         // =========================================================
         // TÍTULOS
@@ -703,7 +755,6 @@ public class VentanaUI2 extends javax.swing.JFrame {
         jMenu1.setText("Archivo");
 
         jMenuItem1.setText("Abrir");
-        jMenu1.add(jMenuItem1);
         
         jMenuItem1.addActionListener(
             new java.awt.event.ActionListener() {
@@ -813,38 +864,52 @@ public class VentanaUI2 extends javax.swing.JFrame {
 
                     .addGroup(
 
-                        layout.createParallelGroup(
-                                javax.swing.GroupLayout.Alignment.LEADING
-                        )
+                                        layout.createParallelGroup(
+                            javax.swing.GroupLayout.Alignment.LEADING
+                    )
 
-                        .addComponent(
-                                jLabel2
-                        )
+                    .addComponent(
+                            jLabel2
+                    )
 
-                        .addComponent(
-                                jScrollPane2,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                380,
-                                Short.MAX_VALUE
-                        )
+                    .addComponent(
+                            jScrollPane2,
+                            javax.swing.GroupLayout.DEFAULT_SIZE,
+                            380,
+                            Short.MAX_VALUE
+                    )
 
-                        .addComponent(
-                                btnExportarTokens,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE
-                        )
+                    .addComponent(
+                            btnExportarTokens,
+                            javax.swing.GroupLayout.DEFAULT_SIZE,
+                            javax.swing.GroupLayout.DEFAULT_SIZE,
+                            Short.MAX_VALUE
+                    )
 
-                        .addComponent(
-                                jLabel3
-                        )
+                    .addComponent(
+                            jLabel3
+                    )
 
-                        .addComponent(
-                                jScrollPane3,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                380,
-                                Short.MAX_VALUE
-                        )
+                    .addComponent(
+                            jScrollPane3,
+                            javax.swing.GroupLayout.DEFAULT_SIZE,
+                            380,
+                            Short.MAX_VALUE
+                    )
+
+                    .addComponent(
+                            btnExportarErrores,
+                            javax.swing.GroupLayout.DEFAULT_SIZE,
+                            javax.swing.GroupLayout.DEFAULT_SIZE,
+                            Short.MAX_VALUE
+                    )
+
+                    .addComponent(
+                            btnGrafica,
+                            javax.swing.GroupLayout.DEFAULT_SIZE,
+                            javax.swing.GroupLayout.DEFAULT_SIZE,
+                            Short.MAX_VALUE
+                    )
 
                         .addComponent(
                                 btnExportarErrores,
@@ -1002,6 +1067,16 @@ public class VentanaUI2 extends javax.swing.JFrame {
                                         42,
                                         javax.swing.GroupLayout.PREFERRED_SIZE
                                 )
+                                .addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED
+                                )
+
+                                .addComponent(
+                                        btnGrafica,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        42,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE
+                                )
                         )
                     )
 
@@ -1017,6 +1092,8 @@ public class VentanaUI2 extends javax.swing.JFrame {
 
         pack();
 
+        setSize(1050, 750);
+        setLocationRelativeTo(null);
         aplicarEstiloSoftCute();
     }
 
@@ -1056,10 +1133,6 @@ public class VentanaUI2 extends javax.swing.JFrame {
         this.txtEditor.setText(archivoCargado);
     }                                          
    
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-       // ventana.procesarArchivo();
-    }                                          
-    
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         //ventana.procesarArchivo();
         boolean b = ventana.procesarArchivo(this.txtEditor.getText());
@@ -1076,6 +1149,10 @@ public class VentanaUI2 extends javax.swing.JFrame {
     
     private void btnExportarErroresActionPerformed(java.awt.event.ActionEvent evt) {                                           
         ventana.generarHTMLError();
+    }
+    
+    private void btnGraficaActionPerformed(java.awt.event.ActionEvent evt) {
+        ventana.generarGrafica();
     }
     
     public static void main(String args[]) {
