@@ -377,14 +377,14 @@ public class VentanaUI2 extends javax.swing.JFrame {
                 )
         );
 
-        menuFile.setText("📂 Archivo");
+        menuFile.setText("📂Archivo");
         menuFile.setForeground(texto);
 
         menuAFD.setText("AFD");
         menuAFD.setForeground(texto);
 
-        menuAbrir.setText("📄 Abrir");
-        menuGuardar.setText("💾 Guardar");
+        menuAbrir.setText("📄Abrir");
+        menuGuardar.setText("💾Guardar");
     }
 
     private void initComponents2() {
@@ -1141,10 +1141,6 @@ public class VentanaUI2 extends javax.swing.JFrame {
     }    
     
     private void menuGraficoActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        /*String archivoCargado= ventana.obtenerArchivoCargado();
-        //ventana.procesarArchivo(archivoCargado);
-        this.txtEditor.setText(archivoCargado);*/
-        
         ventana.generarGrafica();
     }   
    

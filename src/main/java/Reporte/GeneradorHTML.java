@@ -6,10 +6,10 @@ package Reporte;
 
 import Entidades.ErrorLexico;
 import Entidades.Token;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -118,22 +118,18 @@ public class GeneradorHTML {
         String nombreArchivoGuardar =
                 nombreArchivo + "reporte_tokens_" + fechaHora + ".html";
 
-        try (FileWriter writer =
-                new FileWriter(nombreArchivoGuardar)) {
+        boolean guardadoExitoso = false;
 
+        try (FileWriter writer = new FileWriter(nombreArchivoGuardar)) {
             writer.write(html.toString());
-
-            System.out.println(
-                    "Reporte guardado como: "
-                    + nombreArchivoGuardar
-            );
-
+            guardadoExitoso = true;
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar el reporte: " + nombreArchivoGuardar);
+        }
 
-            System.err.println(
-                    "Error al guardar el reporte: "
-                    + e.getMessage()
-            );
+        if (guardadoExitoso) {
+            JOptionPane.showMessageDialog(null, "Reporte guardado como: " + nombreArchivoGuardar);
+            abrirArchivo(nombreArchivoGuardar);
         }
     }
 
@@ -289,16 +285,18 @@ public class GeneradorHTML {
         String nombreArchivoGuardar =
                 nombreArchivo + "reporte_estadisticas_" + fechaHora + ".html";
 
-        try (FileWriter writer =
-                new FileWriter(nombreArchivoGuardar)) {
+        boolean guardadoExitoso = false;
 
+        try (FileWriter writer = new FileWriter(nombreArchivoGuardar)) {
             writer.write(html.toString());
-
-            JOptionPane.showMessageDialog(null, "Reporte guardado como: "+ nombreArchivoGuardar);
-
+            guardadoExitoso = true;
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null,  "Error al guardar el reporte: "+ nombreArchivoGuardar);
+            JOptionPane.showMessageDialog(null, "Error al guardar el reporte: " + nombreArchivoGuardar);
+        }
 
+        if (guardadoExitoso) {
+            JOptionPane.showMessageDialog(null, "Reporte guardado como: " + nombreArchivoGuardar);
+            abrirArchivo(nombreArchivoGuardar);
         }
     }
 
@@ -394,22 +392,37 @@ public class GeneradorHTML {
         String nombreArchivoGuardar =
                 nombreArchivo + "reporte_errores_" + fechaHora + ".html";
 
-        try (FileWriter writer =
-                new FileWriter(nombreArchivoGuardar)) {
+        boolean guardadoExitoso = false;
 
+        try (FileWriter writer = new FileWriter(nombreArchivoGuardar)) {
             writer.write(html.toString());
-
-            System.out.println(
-                    "Reporte guardado como: "
-                    + nombreArchivoGuardar
-            );
-
+            guardadoExitoso = true;
         } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar el reporte: " + nombreArchivoGuardar);
+        }
 
-            System.err.println(
-                    "Error al guardar el reporte: "
-                    + e.getMessage()
-            );
+        if (guardadoExitoso) {
+            JOptionPane.showMessageDialog(null, "Reporte guardado como: " + nombreArchivoGuardar);
+            abrirArchivo(nombreArchivoGuardar);
+        }
+    }
+    
+    private void abrirArchivo(String nombre) {
+        try {
+            File archivoHtml = new File(nombre); 
+
+            if (archivoHtml.exists()) {
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+                    Desktop.getDesktop().open(archivoHtml);
+                } else {
+                    JOptionPane.showMessageDialog(null, "La función de abrir archivos no está soportada en este sistema.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El archivo HTML no existe: " + archivoHtml.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar abrir el archivo HTML: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
