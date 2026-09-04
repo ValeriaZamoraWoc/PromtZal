@@ -222,4 +222,85 @@ public class AFD {
             }
         }
     }
+    
+    public String obtenerDotAFD() {
+        StringBuilder dot = new StringBuilder();
+
+        dot.append("digraph AFD {\n");
+        dot.append("rankdir=LR;\n");
+        dot.append("node [shape=circle];\n");
+
+        // Estado inicial
+        dot.append("inicio [shape=point];\n");
+        dot.append("inicio -> q0;\n");
+
+        // Estados de aceptación
+        dot.append("qID [shape=doublecircle];\n");
+        dot.append("qINT [shape=doublecircle];\n");
+        dot.append("qDOB [shape=doublecircle];\n");
+        dot.append("qDIRECTIVA [shape=doublecircle];\n");
+        dot.append("qFINCOMENTARIO [shape=doublecircle];\n");
+        dot.append("qFINCADENA [shape=doublecircle];\n");
+        dot.append("qFLECHA [shape=doublecircle];\n");
+
+        // Transiciones q0
+        dot.append("q0 -> q0 [label=\"+\"];\n");
+        dot.append("q0 -> q0 [label=\"=\"];\n");
+        dot.append("q0 -> q0 [label=\"{\"];\n");
+        dot.append("q0 -> q0 [label=\"}\"];\n");
+        dot.append("q0 -> q0 [label=\"(\"];\n");
+        dot.append("q0 -> q0 [label=\")\"];\n");
+
+        // Flecha
+        dot.append("q0 -> qGUION [label=\"-\"];\n");
+        dot.append("qGUION -> qFLECHA [label=\">\"];\n");
+
+        // Identificadores
+        dot.append("q0 -> qID [label=\"LETRA\"];\n");
+        dot.append("q0 -> qID [label=\"_\"];\n");
+        dot.append("qID -> qID [label=\"NUMERO\"];\n");
+        dot.append("qID -> qID [label=\"_\"];\n");
+        dot.append("qID -> qID [label=\"LETRA\"];\n");
+
+        // Directivas
+        dot.append("q0 -> qDIRECTIVA [label=\"@\"];\n");
+        dot.append("qDIRECTIVA -> qDIRECTIVA [label=\"LETRA\"];\n");
+
+        // Cadenas
+        dot.append("q0 -> qCADENA [label=\"\\\"\"];\n");
+        dot.append("qCADENA -> qCADENA [label=\"ANY_CADENA\"];\n");
+        dot.append("qCADENA -> qFINCADENA [label=\"\\\"\"];\n");
+
+        // Números
+        dot.append("q0 -> qINT [label=\"NUMERO\"];\n");
+        dot.append("qINT -> qPUNTO [label=\".\"];\n");
+        dot.append("qPUNTO -> qDOB [label=\"NUMERO\"];\n");
+        dot.append("qINT -> qINT [label=\"NUMERO\"];\n");
+        dot.append("qDOB -> qDOB [label=\"NUMERO\"];\n");
+
+        // Comentarios
+        dot.append("q0 -> qBARRA [label=\"/\"];\n");
+
+        // Comentario de bloque
+        dot.append("qBARRA -> qASTERISCO [label=\"*\"];\n");
+
+        // Comentario de línea
+        dot.append("qBARRA -> qCOMCORTO [label=\"/\"];\n");
+
+        // Comentario corto
+        dot.append("qCOMCORTO -> qFINCOMENTARIO [label=\"\\\\n\"];\n");
+        dot.append("qCOMCORTO -> qCOMCORTO [label=\"ANY\"];\n");
+
+        // Comentario largo
+        dot.append("qASTERISCO -> qFINCOMENTARIO [label=\"/\"];\n");
+        dot.append("qASTERISCO -> qASTERISCO [label=\"*\"];\n");
+        dot.append("qASTERISCO -> qCOMLARGO [label=\"ANY\"];\n");
+
+        dot.append("qCOMLARGO -> qASTERISCO [label=\"*\"];\n");
+        dot.append("qCOMLARGO -> qCOMLARGO [label=\"ANY\"];\n");
+
+        dot.append("}\n");
+
+        return dot.toString();
+    }
 }

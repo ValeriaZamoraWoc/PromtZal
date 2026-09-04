@@ -44,11 +44,11 @@ public class VentanaUI2 extends javax.swing.JFrame {
     private JLabel jLabel2 = new javax.swing.JLabel();
     private JLabel jLabel3 = new javax.swing.JLabel();
     private JMenuBar jMenuBar1 = new javax.swing.JMenuBar();
-    private JMenu jMenu1 = new javax.swing.JMenu();
-    private JMenuItem jMenuItem1 = new javax.swing.JMenuItem();
-    private JMenuItem jMenuItem2 = new javax.swing.JMenuItem();
-    private JMenu jMenu2 = new javax.swing.JMenu();
-    private JButton btnGrafica;
+    private JMenu menuFile = new javax.swing.JMenu();
+    private JMenuItem menuAbrir = new javax.swing.JMenuItem();
+    private JMenuItem menuGuardar = new javax.swing.JMenuItem();
+    private JMenu menuAFD = new javax.swing.JMenu();
+    private JMenuItem menuGrafico = new javax.swing.JMenuItem();
     private JButton btnEstadistica;
     
     private Ventana2 ventana = new Ventana2();
@@ -343,32 +343,6 @@ public class VentanaUI2 extends javax.swing.JFrame {
                 0
         );
 
-        btnGrafica.setFont(botonSecundario);
-        btnGrafica.setText("Ver Gráfica");
-        btnGrafica.setBackground(azul);
-        btnGrafica.setForeground(bgVentana);
-        btnGrafica.setFocusPainted(false);
-        btnGrafica.setBorderPainted(false);
-        btnGrafica.setCursor(
-                new java.awt.Cursor(
-                        java.awt.Cursor.HAND_CURSOR
-                )
-        );
-
-        btnGrafica.putClientProperty(
-                "Component.arc",
-                40
-        );
-
-        btnGrafica.putClientProperty(
-                "Button.hoverBackground",
-                azulHover
-        );
-
-        btnGrafica.putClientProperty(
-                "Button.borderWidth",
-                0
-        );
         btnEstadistica.setFont(botonSecundario);
         btnEstadistica.setText("Exportar estadisticas a HTML");
         btnEstadistica.setBackground(azul);
@@ -403,14 +377,14 @@ public class VentanaUI2 extends javax.swing.JFrame {
                 )
         );
 
-        jMenu1.setText("📂 Archivo");
-        jMenu1.setForeground(texto);
+        menuFile.setText("📂 Archivo");
+        menuFile.setForeground(texto);
 
-        jMenu2.setText("✏️ Editar");
-        jMenu2.setForeground(texto);
+        menuAFD.setText("AFD");
+        menuAFD.setForeground(texto);
 
-        jMenuItem1.setText("📄 Abrir");
-        jMenuItem2.setText("💾 Guardar");
+        menuAbrir.setText("📄 Abrir");
+        menuGuardar.setText("💾 Guardar");
     }
 
     private void initComponents2() {
@@ -426,17 +400,17 @@ public class VentanaUI2 extends javax.swing.JFrame {
         btnAnalizar = new javax.swing.JButton();
         btnExportarTokens = new javax.swing.JButton();
         btnExportarErrores = new javax.swing.JButton();
-        btnGrafica = new javax.swing.JButton();
         btnEstadistica = new javax.swing.JButton();
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuFile = new javax.swing.JMenu();
+        menuAbrir = new javax.swing.JMenuItem();
+        menuGuardar = new javax.swing.JMenuItem();
+        menuAFD = new javax.swing.JMenu();
+        menuGrafico = new javax.swing.JMenuItem();
 
         panelEditor = new PanelCute(
                     new java.awt.Color(0x3A, 0x34, 0x31),
@@ -667,11 +641,6 @@ public class VentanaUI2 extends javax.swing.JFrame {
             javax.swing.GroupLayout.DEFAULT_SIZE,
             javax.swing.GroupLayout.DEFAULT_SIZE,
             Short.MAX_VALUE
-        ).addComponent(
-            btnGrafica,
-            javax.swing.GroupLayout.DEFAULT_SIZE,
-            javax.swing.GroupLayout.DEFAULT_SIZE,
-            Short.MAX_VALUE
         )
     );
 
@@ -704,13 +673,6 @@ public class VentanaUI2 extends javax.swing.JFrame {
         )
         .addPreferredGap(
             javax.swing.LayoutStyle.ComponentPlacement.UNRELATED
-        )
-
-        .addComponent(
-            btnGrafica,
-            javax.swing.GroupLayout.PREFERRED_SIZE,
-            42,
-            javax.swing.GroupLayout.PREFERRED_SIZE
         )
     );
         // =========================================================
@@ -755,15 +717,6 @@ public class VentanaUI2 extends javax.swing.JFrame {
                 }
             }
         );
-        btnGrafica.addActionListener(
-            new java.awt.event.ActionListener() {
-                public void actionPerformed(
-                        java.awt.event.ActionEvent evt) {
-
-                    btnGraficaActionPerformed(evt);
-                }
-            }
-        );
         btnEstadistica.addActionListener(
             new java.awt.event.ActionListener() {
                 public void actionPerformed(
@@ -789,47 +742,61 @@ public class VentanaUI2 extends javax.swing.JFrame {
         // MENÚ ARCHIVO
         // =========================================================
 
-        jMenu1.setText("Archivo");
+        menuFile.setText("Archivo");
 
-        jMenuItem1.setText("Abrir");
+        menuAbrir.setText("Abrir");
         
-        jMenuItem1.addActionListener(
+        menuAbrir.addActionListener(
             new java.awt.event.ActionListener() {
                 public void actionPerformed(
                         java.awt.event.ActionEvent evt) {
 
-                    jMenuItem1ActionPerformed(evt);
+                    menuAbrirActionPerformed(evt);
                 }
             }
         );
 
-        jMenu1.add(jMenuItem1);
+        menuFile.add(menuAbrir);
 
-        jMenuItem2.setText("Guardar");
-        jMenu1.add(jMenuItem2);
+        menuGuardar.setText("Guardar");
+        menuFile.add(menuGuardar);
         
-        jMenuItem2.addActionListener(
+        menuGuardar.addActionListener(
             new java.awt.event.ActionListener() {
                 public void actionPerformed(
                         java.awt.event.ActionEvent evt) {
 
-                    jMenuItem1ActionPerformed(evt);
+                    menuGuardarActionPerformed(evt);
                 }
             }
         );
 
-        jMenu1.add(jMenuItem2);
+        menuFile.add(menuGuardar);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuFile);
 
 
         // =========================================================
         // MENÚ EDITAR
         // =========================================================
 
-        jMenu2.setText("Editar");
+        menuAFD.setText("AFD");
+        
+        menuGrafico.setText("Grafico");
+        
+        menuGrafico.addActionListener(
+            new java.awt.event.ActionListener() {
+                public void actionPerformed(
+                        java.awt.event.ActionEvent evt) {
 
-        jMenuBar1.add(jMenu2);
+                    menuGraficoActionPerformed(evt);
+                }
+            }
+        );
+        
+        menuAFD.add(menuGrafico);
+
+        jMenuBar1.add(menuAFD);
 
         setJMenuBar(jMenuBar1);
 
@@ -940,33 +907,19 @@ public class VentanaUI2 extends javax.swing.JFrame {
                             javax.swing.GroupLayout.DEFAULT_SIZE,
                             Short.MAX_VALUE
                     )
-
-                    .addGroup(
-                        layout.createSequentialGroup()
-
-                            .addComponent(
-                                btnGrafica,
-                                0,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE
-                            )
-
-                            .addGap(10)
-
-                            .addComponent(
-                                btnEstadistica,
-                                0,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE
-                            )
+                    .addComponent(
+                        btnEstadistica,
+                        0,
+                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                        Short.MAX_VALUE
                     )
 
-                        .addComponent(
-                                btnExportarErrores,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE
-                        )
+                    .addComponent(
+                            btnExportarErrores,
+                            javax.swing.GroupLayout.DEFAULT_SIZE,
+                            javax.swing.GroupLayout.DEFAULT_SIZE,
+                            Short.MAX_VALUE
+                    )
                     )
 
 
@@ -1120,24 +1073,11 @@ public class VentanaUI2 extends javax.swing.JFrame {
                                 .addPreferredGap(
                                         javax.swing.LayoutStyle.ComponentPlacement.UNRELATED
                                 )
-
-                                .addGroup(layout.createSequentialGroup()
-
-                                    .addComponent(
-                                        btnGrafica,
-                                        0,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        Short.MAX_VALUE
-                                    )
-
-                                    .addGap(10)
-
-                                    .addComponent(
-                                        btnEstadistica,
-                                        0,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        Short.MAX_VALUE
-                                    )
+                                .addComponent(
+                                    btnEstadistica,
+                                    0,
+                                    javax.swing.GroupLayout.DEFAULT_SIZE,
+                                    Short.MAX_VALUE
                                 )
                         )
                     )
@@ -1188,12 +1128,25 @@ public class VentanaUI2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    //abrir archivo
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void menuAbrirActionPerformed(java.awt.event.ActionEvent evt) {                                           
         String archivoCargado= ventana.obtenerArchivoCargado();
         //ventana.procesarArchivo(archivoCargado);
         this.txtEditor.setText(archivoCargado);
-    }                                          
+    }
+    
+    private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        /*String archivoCargado= ventana.obtenerArchivoCargado();
+        //ventana.procesarArchivo(archivoCargado);
+        this.txtEditor.setText(archivoCargado);*/
+    }    
+    
+    private void menuGraficoActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        /*String archivoCargado= ventana.obtenerArchivoCargado();
+        //ventana.procesarArchivo(archivoCargado);
+        this.txtEditor.setText(archivoCargado);*/
+        
+        ventana.generarGrafica();
+    }   
    
     private void btnAnalizarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         //ventana.procesarArchivo();
@@ -1211,10 +1164,6 @@ public class VentanaUI2 extends javax.swing.JFrame {
     
     private void btnExportarErroresActionPerformed(java.awt.event.ActionEvent evt) {                                           
         ventana.generarHTMLError();
-    }
-    
-    private void btnGraficaActionPerformed(java.awt.event.ActionEvent evt) {
-        ventana.generarGrafica();
     }
     
     private void btnEstadisticaActionPerformed(java.awt.event.ActionEvent evt) {

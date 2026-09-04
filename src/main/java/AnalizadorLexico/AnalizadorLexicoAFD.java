@@ -355,7 +355,7 @@ public class AnalizadorLexicoAFD {
     }
  
     public String obtenerDot(){
-        StringBuilder dot = new StringBuilder();
+        /*StringBuilder dot = new StringBuilder();
         dot.append("digraph AFD {\n");
         dot.append("rankdir=LR;\n");
         dot.append("node [shape=circle];\n");
@@ -375,6 +375,8 @@ public class AnalizadorLexicoAFD {
         dot.append("}");
         System.out.println(dot);
         
-        return dot.toString();
+        return dot.toString();*/
+        
+        return afd.obtenerDotAFD();
     }
 }
