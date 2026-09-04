@@ -10,10 +10,15 @@ import Entidades.ErrorLexico;
 import Entidades.Token;
 import Reporte.GeneradorDOT;
 import Reporte.GeneradorHTML;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -126,5 +131,38 @@ public class Ventana2 {
 
         String nombreArchivoGuardar = "archivo_" + fechaHora;
         return nombreArchivoGuardar;
+    }
+    
+    public void guardarArchivo(String contenido) {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar archivo .pz");
+
+        FileNameExtensionFilter filter =new FileNameExtensionFilter("Archivos PZ (*.pz)", "pz");
+
+        fileChooser.setFileFilter(filter);
+
+        int seleccion = fileChooser.showSaveDialog(null);
+
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+
+            File archivoAGuardar = fileChooser.getSelectedFile();
+            String ruta = archivoAGuardar.getAbsolutePath();
+
+            // Si el usuario no escribió la extensión .pz, se agrega automáticamente
+            if (!ruta.toLowerCase().endsWith(".pz")) {
+                archivoAGuardar = new File(ruta + ".pz");
+            }
+
+            try (FileWriter writer = new FileWriter(archivoAGuardar)) {
+
+                writer.write(contenido);
+
+                JOptionPane.showMessageDialog(null,"Archivo guardado exitosamente en:\n"+ archivoAGuardar.getAbsolutePath());
+
+            } catch (IOException e) {
+
+                JOptionPane.showMessageDialog(null,"Error al guardar el archivo: " + e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 }

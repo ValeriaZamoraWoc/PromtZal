@@ -1138,6 +1138,12 @@ public class VentanaUI2 extends javax.swing.JFrame {
         /*String archivoCargado= ventana.obtenerArchivoCargado();
         //ventana.procesarArchivo(archivoCargado);
         this.txtEditor.setText(archivoCargado);*/
+        String contenido = this.txtEditor.getText();
+        if(contenido == null||contenido.isEmpty() || contenido.isBlank()){
+            JOptionPane.showMessageDialog(null, "No hay texto para guardar");
+        }else{
+            ventana.guardarArchivo(contenido);
+        }
     }    
     
     private void menuGraficoActionPerformed(java.awt.event.ActionEvent evt) {                                           

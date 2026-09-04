@@ -355,28 +355,6 @@ public class AnalizadorLexicoAFD {
     }
  
     public String obtenerDot(){
-        /*StringBuilder dot = new StringBuilder();
-        dot.append("digraph AFD {\n");
-        dot.append("rankdir=LR;\n");
-        dot.append("node [shape=circle];\n");
-        dot.append("inicio [shape=point];\n");
-        dot.append("inicio -> q0;\n");
-
-        // Estados de aceptación
-        dot.append("qID [shape=doublecircle];\n");
-        dot.append("qINT [shape=doublecircle];\n");
-        dot.append("qDOB [shape=doublecircle];\n");
-        dot.append("qDIRECTIVA [shape=doublecircle];\n");
-        dot.append("qFINCADENA [shape=doublecircle];\n");
-        dot.append("qFINCOMENTARIO [shape=doublecircle];\n");
-        
-        dot.append(recorridoDot);
-        
-        dot.append("}");
-        System.out.println(dot);
-        
-        return dot.toString();*/
-        
         return afd.obtenerDotAFD();
     }
 }
