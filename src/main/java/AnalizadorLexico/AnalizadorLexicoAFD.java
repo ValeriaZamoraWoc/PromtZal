@@ -178,7 +178,6 @@ public class AnalizadorLexicoAFD {
                 || c == '='
                 || c == '"'
                 || c == '/'
-                || c == ';'
                 || c == ',';
     }
     
@@ -205,7 +204,8 @@ public class AnalizadorLexicoAFD {
                 }
             }
             case"qFINCADENA"->{
-                agregarToken(TipoToken.CADENA, lexema, fila,columna);
+                String lex = lexema.substring(1, lexema.length()-1);
+                agregarToken(TipoToken.CADENA, lex, fila,columna);
                 contadorTokens[8]++;
             }
             case"qFINCOMENTARIO"->{

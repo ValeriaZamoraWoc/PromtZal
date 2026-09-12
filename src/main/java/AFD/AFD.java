@@ -72,6 +72,7 @@ public class AFD {
         
         //transiciones q0
         transiciones.add(new Transicion(q0, q0, "+"));
+        transiciones.add(new Transicion(q0, q0, ","));
         transiciones.add(new Transicion(q0, q0, "="));
         transiciones.add(new Transicion(q0, q0, "{"));
         transiciones.add(new Transicion(q0, q0, "}"));
