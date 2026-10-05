@@ -807,7 +807,11 @@ public class AFD_JFlex {
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
-        return null;
+              {
+                System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"match: <<EOF>>");
+                System.out.println("action [110] { return new Token(\"EOF\", TipoToken.EOF, yyline+1, yycolumn+1); }");
+                return new Token("EOF", TipoToken.EOF, yyline+1, yycolumn+1);
+              }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
