@@ -13,28 +13,28 @@ import java.util.List;
  * @author cacerola
  */ 
 public class Conector {
-    private String nombre;
-    private List<Termino> termino;
+    private String id;
+    private List<Termino> expresion;
 
     public Conector() {
-        this.nombre = "";
-        this.termino = new ArrayList<>();
+        this.id = "";
+        this.expresion = new ArrayList<>();
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getId() {
+        return id;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public List<Termino> getTermino() {
-        return termino;
+    public List<Termino> getExpresion() {
+        return expresion;
     }
 
-    public void setTermino(List<Termino> termino) {
-        this.termino = termino;
+    public void setExpresion(List<Termino> expresion) {
+        this.expresion = expresion;
     }
-    
+
 }

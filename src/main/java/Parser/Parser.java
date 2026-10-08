@@ -34,26 +34,6 @@ public class Parser {
         
     }
     
-    private void parsearAgente(){
-        
-    }
-    
-    private void parsearComando(){
-        
-    }
-    
-    private void parsearConector(){
-        
-    }
-    
-    private void parsearContexto(){
-        
-    }
-    
-    private void parsearVariable(){
-        
-    }
-    
     private void parsearEjecutar(){
         
     }
@@ -62,17 +42,186 @@ public class Parser {
         
     }
     
-    private Termino parsearTermino(){
-        if(tokenActual.getTipo() == TipoToken.CARGAR){
-            Cargar cargar = parsearCargar();
-            return cargar;  
+    private List<Agente> parsearAgentes(){
+        List<Agente> agentes = new ArrayList();
+        
+        while(tokenActual.getTipo() == TipoToken.AGENTE){
+            Agente agente = new Agente ();
+            //consumir palabra AGENTE
+            consumir(TipoToken.AGENTE);
+            //consumir id
+            Token id = consumir(TipoToken.ID);
+            if(id != null){
+                agente.setId(id.getLexema());
+            }
+            //consumir llave
+            consumir(TipoToken.LLAVE_A);
+            //consumir contexto
+            Contexto contexto = parsearContexto();
+            if(contexto != null){
+                agente.setContexto(contexto);
+            }
+            //consumir variables
+            List<Variable> variables = parsearVariables();
+            if(!variables.isEmpty()){
+                agente.setVariables(variables);
+            }
+            //consumir comandos
+            List<Comando> comandos = parsearComandos();
+            if(!comandos.isEmpty()){
+                agente.setComandos(comandos);
+            }
+            agentes.add(agente);
         }
+        return agentes;
+    }
+    
+    private List<Comando> parsearComandos(){
+        List<Comando> comandos = new ArrayList<>();
+        
+        while(tokenActual.getTipo() == TipoToken.COMANDO_IA){
+            Comando comando = new Comando();
+            //consumir el comando
+            Token nombre = consumir(TipoToken.COMANDO_IA);
+            if(nombre != null){
+                comando.setNombre(nombre.getLexema());
+            }
+            //consumir expresion
+            List<Termino> expresion = parsearExpresion();
+            if(expresion != null || !expresion.isEmpty()){
+                comando.setExpresion(expresion);
+            }
+            //consumir conectores
+            List<Conector> conectores = parsearConector();
+            if(conectores != null || !conectores.isEmpty()){
+                comando.setConectores(conectores);
+            }
+            //consumir flecha
+            consumir(TipoToken.FLECHA);
+            //consumir id
+            Token id =consumir(TipoToken.ID);
+            if(id != null){
+                comando.setId(id.getLexema());
+            }
+            comandos.add(comando);
+        }
+        return comandos;
+    }
+    
+    private List<Conector> parsearConector(){
+        List<Conector> conectores= new ArrayList<>();
+        
+        while(tokenActual.getTipo()== TipoToken.CONECTOR){
+           Conector conector = new Conector();
+            //consumir el conector (varios)
+            consumir(TipoToken.CONECTOR);
+            //consumir nombre del conector
+            Token id = consumir(TipoToken.ID);
+            if(id != null){
+                conector.setId(id.getLexema());
+            }
+            //consumir expresion
+            List<Termino> expresion = parsearExpresion();
+            if(expresion != null || !expresion.isEmpty()){
+                conector.setExpresion(expresion);
+            } 
+            conectores.add(conector);
+        }
+        return conectores;
+    }
+    
+    private List<Variable> parsearVariables(){
+        List<Variable> variables = new ArrayList<>();
+        while(tokenActual.getTipo() == TipoToken.VARIABLE){
+           Variable variable = new Variable(); 
+           //consumir palabra VARIABLE
+           consumir(TipoToken.VARIABLE);
+           //consumir el nombre de la variable
+           Token id = consumir(TipoToken.ID);
+           if(id != null){
+               variable.setId(id.getLexema());
+           }
+           //consumir signo igual
+           consumir(TipoToken.IGUAL); 
+           //consumir expresion
+           List<Termino> expresion= parsearExpresion();
+           
+           if(expresion != null || !expresion.isEmpty()){
+               variable.setExpresion(expresion);
+           }
+           
+           variables.add(variable);
+        }
+        return variables;
+    }
+    
+    private List<Termino> parsearExpresion() {
+
+        List<Termino> terminos = new ArrayList<>();
+
+        Termino termino = parsearTermino();
+
+        if(termino != null) {
+            terminos.add(termino);
+        }
+
+        while(tokenActual.getTipo() == TipoToken.MAS) {
+
+            consumir(TipoToken.MAS);
+
+            termino = parsearTermino();
+
+            if(termino != null) {
+                terminos.add(termino);
+            }
+        }
+
+        return terminos;
+    }
+    
+    private Contexto parsearContexto(){
+        Contexto contexto = new Contexto();
+        consumir(TipoToken.CONTEXTO);
         //
-        else if(tokenActual.getTipo() == TipoToken.CADENA ||tokenActual.getTipo() == TipoToken.ID||tokenActual.getTipo() == TipoToken.NUMERO){
-            Termino termino = new Termino();
-            termino.setValor(tokenActual.getLexema());
-            consumir(tokenActual.getTipo());
-            return termino;
+        consumir(TipoToken.IGUAL);
+        //
+        Token cadena = consumir(TipoToken.CADENA);
+
+        if(cadena != null){
+            contexto.setCadena(cadena.getLexema());
+        }
+        return contexto;
+    }
+    
+    private Termino parsearTermino(){
+        if(null != tokenActual.getTipo()) switch (tokenActual.getTipo()) {
+            case CARGAR -> {
+                return parsearCargar();
+            }
+            case CADENA, ID -> {
+                Termino termino = new Termino();
+                Token valor = consumir(tokenActual.getTipo());
+                if(valor != null){
+                    termino.setValor(valor.getLexema());
+                }
+                return termino;
+            }
+            case NUMERO -> {
+                Termino termino = new Termino();
+                //consumir el numero
+                Token numero = consumir(TipoToken.NUMERO);
+                if(numero != null){
+                    termino.setValor(numero.getLexema());
+                }
+                //consumir el id si hay
+                if(tokenActual.getTipo() == TipoToken.ID){
+                    Token id = consumir(TipoToken.ID);
+                    termino.setValor(numero.getLexema()+" "+id.getLexema());
+                }
+                return termino;
+            }
+            default ->             {
+            }
         }
         errores.add(new ErrorSintactico(tokenActual.getLexema(),"Término no reconocido o erróneo", tokenActual.getFila(), tokenActual.getColumna()));
         return null;
@@ -84,15 +233,14 @@ public class Parser {
         //
         consumir(TipoToken.PAR_A);
         //
-        if(tokenActual.getTipo() == TipoToken.CADENA){
-            cargar.setValor(tokenActual.getLexema());
-        }else{
-            errores.add(new ErrorSintactico(tokenActual.getLexema(),"Cadena errónea en Cargar", tokenActual.getFila(), tokenActual.getColumna()));
+        Token cadena = consumir(TipoToken.CADENA);
+
+        if (cadena != null) {
+            cargar.setValor(cadena.getLexema());
         }
-        consumir(TipoToken.CADENA);
-        //
+
         consumir(TipoToken.PAR_C);
-        //
+
         return cargar;
     }
     
@@ -103,7 +251,7 @@ public class Parser {
             avanzar();
             return consumido;
         }
-        errores.add(new ErrorSintactico(tokenActual.getLexema(),"Falta de token esperado", tokenActual.getFila(), tokenActual.getColumna()));
+        errores.add(new ErrorSintactico(tokenActual.getLexema(),"Falta de token "+ esperado.name()+ " esperado", tokenActual.getFila(), tokenActual.getColumna()));
         return null;
     }
     

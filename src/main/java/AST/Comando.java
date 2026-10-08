@@ -14,13 +14,13 @@ import java.util.List;
  */
 public class Comando {
     private String nombre;
-    private List<Termino> terminos;
+    private List<Termino> expresion;
     private List<Conector> conectores;
     private String id;
 
     public Comando() {
         this.nombre = "";
-        this.terminos = new ArrayList<>();
+        this.expresion = new ArrayList<>();
         this.conectores = new ArrayList<>();
         this.id = "";
     }
@@ -49,13 +49,12 @@ public class Comando {
         this.id = id;
     }
 
-    public List<Termino> getTermino() {
-        return terminos;
+    public List<Termino> getExpresion() {
+        return expresion;
     }
 
-    public void setTermino(List<Termino> termino) {
-        this.terminos = termino;
+    public void setExpresion(List<Termino> expresion) {
+        this.expresion = expresion;
     }
-    
-    
+
 }

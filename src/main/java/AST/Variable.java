@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class Variable {
     private String id;
-    private List<Termino> terminos;
+    private List<Termino> expresion;
 
     public Variable() {
         this.id = "";
-        this.terminos = new ArrayList<>();
+        this.expresion = new ArrayList<>();
     }
 
     public String getId() {
@@ -29,12 +29,13 @@ public class Variable {
         this.id = id;
     }    
 
-    public List<Termino> getTermino() {
-        return terminos;
+    public List<Termino> getExpresion() {
+        return expresion;
     }
 
-    public void setTermino(List<Termino> termino) {
-        this.terminos = termino;
+    public void setExpresion(List<Termino> expresion) {
+        this.expresion = expresion;
     }
+
     
 }
