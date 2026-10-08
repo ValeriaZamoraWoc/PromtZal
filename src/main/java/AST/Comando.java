@@ -5,6 +5,7 @@
 package AST;
 
 import AST.Termino.Termino;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +14,48 @@ import java.util.List;
  */
 public class Comando {
     private String nombre;
-    private Termino termino;
+    private List<Termino> terminos;
     private List<Conector> conectores;
     private String id;
+
+    public Comando() {
+        this.nombre = "";
+        this.terminos = new ArrayList<>();
+        this.conectores = new ArrayList<>();
+        this.id = "";
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Conector> getConectores() {
+        return conectores;
+    }
+
+    public void setConectores(List<Conector> conectores) {
+        this.conectores = conectores;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Termino> getTermino() {
+        return terminos;
+    }
+
+    public void setTermino(List<Termino> termino) {
+        this.terminos = termino;
+    }
+    
+    
 }

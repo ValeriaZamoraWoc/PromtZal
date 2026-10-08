@@ -4,10 +4,25 @@
  */
 package AST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author cacerola
  */
 public class Exportar {
-    private String id;
+    private List<String> ids;
+
+    public Exportar() {
+        this.ids = new ArrayList<>();
+    }
+
+    public List<String> getIds() {
+        return ids;
+    }
+
+    public void setIds(List<String> ids) {
+        this.ids = ids;
+    }
 }

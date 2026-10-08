@@ -21,6 +21,39 @@ public class Programa {
         this.directivas = new ArrayList<>();
         this.agentes = new ArrayList<>();
         this.ejecuciones = new ArrayList<>();
+        this.exportar= new Exportar();
+    }
+
+    public List<String> getDirectivas() {
+        return directivas;
+    }
+
+    public void setDirectivas(List<String> directivas) {
+        this.directivas = directivas;
+    }
+
+    public List<Agente> getAgentes() {
+        return agentes;
+    }
+
+    public void setAgentes(List<Agente> agentes) {
+        this.agentes = agentes;
+    }
+
+    public List<Ejecutar> getEjecuciones() {
+        return ejecuciones;
+    }
+
+    public void setEjecuciones(List<Ejecutar> ejecuciones) {
+        this.ejecuciones = ejecuciones;
+    }
+
+    public Exportar getExportar() {
+        return exportar;
+    }
+
+    public void setExportar(Exportar exportar) {
+        this.exportar = exportar;
     }
     
     

@@ -8,13 +8,13 @@ package Entidades;
  *
  * @author cacerola
  */
-public class ErrorLexico {
+public class ErrorSintactico {
     
     String lexema;
     int fila, columna;
     String descripcion;
     
-    public ErrorLexico(String c,String descripcion, int fila, int columna){
+    public ErrorSintactico(String c,String descripcion, int fila, int columna){
         this.lexema=c;    
         this.descripcion= descripcion;
         this.fila = fila;

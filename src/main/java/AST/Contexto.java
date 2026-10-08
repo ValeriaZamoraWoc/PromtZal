@@ -10,4 +10,18 @@ package AST;
  */
 public class Contexto {
     private String cadena;
+
+    public Contexto() {
+        this.cadena = new String();
+    }
+
+    public String getCadena() {
+        return cadena;
+    }
+
+    public void setCadena(String cadena) {
+        this.cadena = cadena;
+    }
+    
+    
 }

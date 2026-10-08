@@ -9,8 +9,4 @@ package AST.Termino;
  * @author cacerola
  */
 public class Cargar extends Termino{
-
-    public Cargar(String valor) {
-        super(valor);
-    }
 }

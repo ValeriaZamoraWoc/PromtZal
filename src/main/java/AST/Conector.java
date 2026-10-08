@@ -5,6 +5,8 @@
 package AST;
 
 import AST.Termino.Termino;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,5 +14,27 @@ import AST.Termino.Termino;
  */ 
 public class Conector {
     private String nombre;
-    private Termino termino;
+    private List<Termino> termino;
+
+    public Conector() {
+        this.nombre = "";
+        this.termino = new ArrayList<>();
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Termino> getTermino() {
+        return termino;
+    }
+
+    public void setTermino(List<Termino> termino) {
+        this.termino = termino;
+    }
+    
 }

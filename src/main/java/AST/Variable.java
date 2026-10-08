@@ -5,6 +5,8 @@
 package AST;
 
 import AST.Termino.Termino;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -12,5 +14,27 @@ import AST.Termino.Termino;
  */
 public class Variable {
     private String id;
-    private Termino termino;
+    private List<Termino> terminos;
+
+    public Variable() {
+        this.id = "";
+        this.terminos = new ArrayList<>();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }    
+
+    public List<Termino> getTermino() {
+        return terminos;
+    }
+
+    public void setTermino(List<Termino> termino) {
+        this.terminos = termino;
+    }
+    
 }

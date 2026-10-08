@@ -11,8 +11,17 @@ package AST.Termino;
 public class Termino {
     protected String valor;
 
-    public Termino(String valor) {
+    public Termino() {
+        this.valor = new String();
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
         this.valor = valor;
     }
+    
     
 }

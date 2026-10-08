@@ -4,10 +4,25 @@
  */
 package AST;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author cacerola
  */
 public class Ejecutar {
     private String id;
+
+    public Ejecutar() {
+        this.id = "";
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
