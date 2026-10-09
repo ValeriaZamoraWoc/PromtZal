@@ -16,11 +16,6 @@ public class Conector {
     private String id;
     private List<Termino> expresion;
 
-    public Conector() {
-        this.id = "";
-        this.expresion = new ArrayList<>();
-    }
-
     public String getId() {
         return id;
     }

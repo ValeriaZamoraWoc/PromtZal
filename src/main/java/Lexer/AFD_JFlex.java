@@ -4,7 +4,7 @@
 
 package Lexer;
 import Entidades.Token;
-import Entidades.ErrorSintactico;
+import Entidades.ErrorLexico;
 import Entidades.TipoToken;
 import java.util.ArrayList;
 import java.util.List;
@@ -381,7 +381,7 @@ public class AFD_JFlex {
   private boolean zzEOFDone;
 
   /* user code: */
-    private List<ErrorSintactico> errores = new ArrayList<>();
+    private List<ErrorLexico> errores = new ArrayList<>();
 
 
   /**
@@ -817,8 +817,8 @@ public class AFD_JFlex {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
             System.out.println("line: "+(yyline+1)+" "+"col: "+(yycolumn+1)+" "+"match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [109] { errores.add(new ErrorLexico(yytext(),\"error no manejado\", yyline+1, yycolumn+1)); }");
-            { errores.add(new ErrorSintactico(yytext(),"error no manejado", yyline+1, yycolumn+1));
+            System.out.println("action [109] { errores.add(new ErrorLexico(yytext(),\"Carácter no reconocido\", yyline+1, yycolumn+1)); }");
+            { errores.add(new ErrorLexico(yytext(),"Carácter no reconocido", yyline+1, yycolumn+1));
             }
           // fall through
           case 23: break;

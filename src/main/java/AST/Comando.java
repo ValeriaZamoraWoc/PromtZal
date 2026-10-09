@@ -18,13 +18,6 @@ public class Comando {
     private List<Conector> conectores;
     private String id;
 
-    public Comando() {
-        this.nombre = "";
-        this.expresion = new ArrayList<>();
-        this.conectores = new ArrayList<>();
-        this.id = "";
-    }
-
     public String getNombre() {
         return nombre;
     }

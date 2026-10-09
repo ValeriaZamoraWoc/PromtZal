@@ -16,25 +16,20 @@ public class Variable {
     private String id;
     private List<Termino> expresion;
 
-    public Variable() {
-        this.id = "";
-        this.expresion = new ArrayList<>();
+    public void setId(String id) {
+        this.id = id;
+    }    
+
+    public void setExpresion(List<Termino> expresion) {
+        this.expresion = expresion;
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }    
-
     public List<Termino> getExpresion() {
         return expresion;
-    }
-
-    public void setExpresion(List<Termino> expresion) {
-        this.expresion = expresion;
     }
 
     

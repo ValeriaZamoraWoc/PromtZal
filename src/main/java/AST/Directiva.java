@@ -2,22 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package AST.Termino;
+package AST;
 
 /**
  *
  * @author cacerola
  */
-public class Termino {
-    protected String valor;
-
-    public void setValor(String valor) {
-        this.valor = valor;
+public class Directiva {
+    private String cadena;
+    
+    public String getCadena() {
+        return cadena;
     }
 
-    public String getValor() {
-        return valor;
+    public void setCadena(String cadena) {
+        this.cadena = cadena;
     }
-    
-    
+
 }

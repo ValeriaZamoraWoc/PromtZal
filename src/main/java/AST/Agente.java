@@ -17,13 +17,6 @@ public class Agente {
     private List<Variable> variables;//pueden ser nulas
     private List<Comando> comandos;//almenos uno
 
-    public Agente() {
-        this.id = new String();
-        this.contexto = new Contexto();
-        this.variables = new ArrayList<>();
-        this.comandos = new ArrayList<>();
-    }
-
     public String getId() {
         return id;
     }

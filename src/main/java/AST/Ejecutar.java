@@ -14,10 +14,6 @@ import java.util.List;
 public class Ejecutar {
     private String id;
 
-    public Ejecutar() {
-        this.id = "";
-    }
-
     public String getId() {
         return id;
     }

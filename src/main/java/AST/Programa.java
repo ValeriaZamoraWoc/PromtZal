@@ -12,7 +12,7 @@ import java.util.List;
  * @author cacerola
  */
 public class Programa {
-    private List<String> directivas;
+    private List<Directiva> directivas;
     private List<Agente> agentes;
     private List<Ejecutar> ejecuciones;
     private Exportar exportar;
@@ -24,11 +24,11 @@ public class Programa {
         this.exportar= new Exportar();
     }
 
-    public List<String> getDirectivas() {
+    public List<Directiva> getDirectivas() {
         return directivas;
     }
 
-    public void setDirectivas(List<String> directivas) {
+    public void setDirectivas(List<Directiva> directivas) {
         this.directivas = directivas;
     }
 
