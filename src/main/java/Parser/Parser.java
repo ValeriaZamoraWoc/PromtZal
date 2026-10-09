@@ -30,6 +30,78 @@ public class Parser {
         errores = new ArrayList<>();
     }
     
+    public Programa getPrograma(){
+        return parsearPrograma();
+    }
+    
+    public void imprimirPrograma(Programa programa) {
+        if (programa == null) {
+            System.out.println("El programa es nulo.");
+            return;
+        }
+
+        System.out.println("================ PROGRAMA ================");
+
+        // 1. Directivas
+        System.out.println("\n--- DIRECTIVAS ---");
+        if (programa.getDirectivas() != null) {
+            for (Directiva d : programa.getDirectivas()) {
+                System.out.println("  * Cadena: " + d.getCadena());
+            }
+        }
+
+        // 2. Agentes
+        System.out.println("\n--- AGENTES ---");
+        if (programa.getAgentes() != null) {
+            for (Agente a : programa.getAgentes()) {
+                System.out.println("  * ID: " + a.getId());
+                if (a.getContexto() != null) {
+                    System.out.println("    - Contexto: " + a.getContexto().getCadena());
+                }
+                System.out.println("    - Variables:");
+                if (a.getVariables() != null) {
+                    for (Variable v : a.getVariables()) {
+                        System.out.print("      -> " + v.getId() + " = ");
+                        if (v.getExpresion() != null) {
+                            for (Termino t : v.getExpresion()) {
+                                System.out.print("[" + t.getValor() + "] ");
+                            }
+                        }
+                        System.out.println();
+                    }
+                }
+                System.out.println("    - Comandos:");
+                if (a.getComandos() != null) {
+                    for (Comando c : a.getComandos()) {
+                        System.out.print("      -> Comando: " + c.getNombre() + " | Destino ID: " + c.getId() + " | Expr: ");
+                        if (c.getExpresion() != null) {
+                            for (Termino t : c.getExpresion()) {
+                                System.out.print("[" + t.getValor() + "] ");
+                            }
+                        }
+                        System.out.println();
+                    }
+                }
+            }
+        }
+
+        // 3. Ejecuciones
+        System.out.println("\n--- EJECUCIONES ---");
+        if (programa.getEjecuciones() != null) {
+            for (Ejecutar e : programa.getEjecuciones()) {
+                System.out.println("  * Ejecutar ID: " + e.getId());
+            }
+        }
+
+        // 4. Exportar
+        System.out.println("\n--- EXPORTAR ---");
+        if (programa.getExportar() != null && programa.getExportar().getIds() != null) {
+            System.out.println("  * IDs a exportar: " + String.join(", ", programa.getExportar().getIds()));
+        }
+
+        System.out.println("\n==========================================");
+    }
+    
     public Programa parsearPrograma(){
         Programa programa = new Programa();
         //consumir directivas
@@ -128,7 +200,7 @@ public class Parser {
             agente.setComandos(comandos);
             agentes.add(agente);
             
-            consumir(TipoToken.PAR_A);
+            consumir(TipoToken.LLAVE_C);
         }
         return agentes;
     }
