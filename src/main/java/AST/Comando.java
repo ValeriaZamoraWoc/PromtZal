@@ -5,7 +5,6 @@
 package AST;
 
 import AST.Termino.Termino;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +16,23 @@ public class Comando {
     private List<Termino> expresion;
     private List<Conector> conectores;
     private String id;
+private int fila, columna;
+
+    public int getFila() {
+        return fila;
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
 
     public String getNombre() {
         return nombre;

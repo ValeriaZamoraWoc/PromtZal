@@ -10,9 +10,14 @@
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/AST/Termino/Termino.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/AST/Variable.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Entidades/ErrorLexico.java
+/home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Entidades/ErrorSemantico.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Entidades/ErrorSintactico.java
+/home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Entidades/Simbolo.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Entidades/TipoToken.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Entidades/Token.java
+/home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/General/GeneradorPromtZal.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/General/Main.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Lexer/AFD_JFlex.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Parser/Parser.java
+/home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Semantica/AnalizadorSemantico.java
+/home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Semantica/TablaSimbolo.java

@@ -21,7 +21,7 @@ public class ErrorLexico {
     }
     
     public String getError(){
-        return "Error Sintáctico: '"+lexema+"' descripcion: '"+descripcion+"' en fila: "+ fila+ " columna: "+columna;
+        return "Error Lexico: '"+lexema+"' descripcion: '"+descripcion+"' en fila: "+ fila+ " columna: "+columna;
     }
 
     public String getLexema() {

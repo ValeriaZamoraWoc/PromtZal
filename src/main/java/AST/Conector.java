@@ -31,5 +31,22 @@ public class Conector {
     public void setExpresion(List<Termino> expresion) {
         this.expresion = expresion;
     }
+private int fila, columna;
+
+    public int getFila() {
+        return fila;
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
 
 }

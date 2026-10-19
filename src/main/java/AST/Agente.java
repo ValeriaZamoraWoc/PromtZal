@@ -16,6 +16,23 @@ public class Agente {
     private Contexto contexto;
     private List<Variable> variables;//pueden ser nulas
     private List<Comando> comandos;//almenos uno
+    private int fila, columna;
+
+    public int getFila() {
+        return fila;
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
 
     public String getId() {
         return id;
