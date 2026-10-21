@@ -25,6 +25,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Main {
     
     public static void main(String[] args) {
+        
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Seleccionar archivo de entrada");
 

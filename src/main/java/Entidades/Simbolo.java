@@ -20,7 +20,6 @@ public class Simbolo {
         this.nombre = nombre;
         this.tipo = tipo;
         this.agente = agente;
-        //this.fila = fila;
     }
 
     public String getNombre() {

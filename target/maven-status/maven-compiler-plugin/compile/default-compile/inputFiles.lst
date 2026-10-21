@@ -15,9 +15,12 @@
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Entidades/Simbolo.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Entidades/TipoToken.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Entidades/Token.java
+/home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/General/GeneradorHTML.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/General/GeneradorPromtZal.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/General/Main.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Lexer/AFD_JFlex.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Parser/Parser.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Semantica/AnalizadorSemantico.java
 /home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/Semantica/TablaSimbolo.java
+/home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/UI/IDE.java
+/home/cacerola/NetBeansProjects/PromptZal_2/src/main/java/UI/UI_IDE.java

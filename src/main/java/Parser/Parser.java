@@ -233,8 +233,6 @@ public class Parser {
         {
             Token tokenConector = consumir(TipoToken.CONECTOR);
 
-            consumir(TipoToken.CONECTOR);
-
             List<Termino> expresion = parsearExpresion();
 
             if (expresion.isEmpty()) {
