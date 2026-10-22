@@ -13,12 +13,14 @@ import General.GeneradorPromtZal;
 import Lexer.AFD_JFlex;
 import Parser.Parser;
 import Semantica.AnalizadorSemantico;
+import Semantica.TablaSimbolo;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringReader;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -29,12 +31,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author cacerola
  */
 public class IDE {
-    GeneradorHTML html;
-    AFD_JFlex lexer;
-    Parser parser;
-    AnalizadorSemantico as;
-    GeneradorPromtZal promtzal;
+    private GeneradorHTML html;
+    private AFD_JFlex lexer;
+    private Parser parser;
+    private AnalizadorSemantico as;
+    private GeneradorPromtZal promtzal;
     private File archivoActual;  
+    private List<ErrorLexico> eLex;
+    private List<ErrorSintactico> eSin;
+    private List<ErrorSemantico> eSem;
+    private TablaSimbolo tabla;
+    private Programa programa;
     
     public IDE(){
         html = new GeneradorHTML();
@@ -55,6 +62,15 @@ public class IDE {
         }
 
         return null;
+    }
+    
+    private void limpiar(){
+        eLex = null;
+        eSin = null;
+        eSem= null;
+        promtzal = null;
+        tabla = null;
+        programa = null;
     }
     
     public String leerArchivo(File archivo) {
@@ -126,39 +142,42 @@ public class IDE {
     
     public String compilar(String texto){
         StringBuilder s = new StringBuilder();
+        limpiar();
         
-        try (Reader reader = new FileReader(texto)) {
+        try (Reader reader = new StringReader(texto)) {
             //analisis del lexer
             lexer = new AFD_JFlex(reader);
-            List<ErrorLexico> eLex = lexer.getErrores();
+            eLex = lexer.getErrores();
             
-            if(eLex == null || eLex.isEmpty()){
+            if(eLex.isEmpty()){
                 s.append("Análisis léxico exitoso --- No errores detectados\n");
                 parser = new Parser(lexer);
-                Programa programaAnalizado = parser.getPrograma();
-                List<ErrorSintactico> eSin = parser.getErrores();
+                programa= parser.getPrograma();
+                eSin = parser.getErrores();
                 
-                if(eSin== null || eSin.isEmpty()){
+                if(eSin.isEmpty()){
                     s.append("Analisis sintáctico exitoso --- No errores detectados\n");
-                    as = new AnalizadorSemantico(programaAnalizado);
-                    List<ErrorSemantico> eSem = as.getErrores();
+                    as = new AnalizadorSemantico(programa);
+                    as.analizar();
+                    tabla = as.getTabla();
+                    eSem = as.getErrores();
                     
-                    if(eSem == null || eSem.isEmpty()){
+                    if(eSem.isEmpty()){
                         s.append("Análisis semántico exitoso --- No errores detectados\n");
-                        promtzal = new GeneradorPromtZal(programaAnalizado);
+                        promtzal = new GeneradorPromtZal(programa);
                         s.append("COMPILADO COMPLETADO SIN ERROES\n");
                         return s.toString();
                     }else{
-                        s.append(transcribirErroresSemanticos(eSem));
+                        s.append(transcribirErroresSemanticos());
                         return s.toString();
                     }
                 }else{
-                    s.append(transcribirErroresSintacticos(eSin));
+                    s.append(transcribirErroresSintacticos());
                     return s.toString();
                 }
                 
             }else{
-                s.append(transcribirErroresLexicos(eLex));
+                s.append(transcribirErroresLexicos());
                 return s.toString();
             }
             
@@ -169,48 +188,69 @@ public class IDE {
         return "Error al compilar";
     }
     
-    private String transcribirErroresLexicos(List<ErrorLexico> e){
+    private String transcribirErroresLexicos(){
         String s="";
-        for (int i = 0; i < e.size(); i++) {
-            s+=e.get(i).getError()+"\n";
+        for (int i = 0; i < eLex.size(); i++) {
+            s+=eLex.get(i).getError()+"\n";
         }
         return s;
     }
     
-    private String transcribirErroresSintacticos(List<ErrorSintactico> e){
+    private String transcribirErroresSintacticos(){
         String s="";
-        for (int i = 0; i < e.size(); i++) {
-            s+=e.get(i).getError()+"\n";
+        for (int i = 0; i < eSin.size(); i++) {
+            s+=eSin.get(i).getError()+"\n";
         }
         return s;
     }
     
-    private String transcribirErroresSemanticos(List<ErrorSemantico> e){
+    private String transcribirErroresSemanticos(){
         String s="";
-        for (int i = 0; i < e.size(); i++) {
-            s+=e.get(i).getError()+"\n";
+        for (int i = 0; i < eSem.size(); i++) {
+            s+=eSem.get(i).getError()+"\n";
         }
         return s;
     }
     
     public void generarHTMLLexicos(){
-        
+        if(!eLex.isEmpty()){
+            html.generarHTMLErroresLexicos(eLex);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "No hay errores léxicos");
+        }
     }
     
     public void generarHTMLSintacticos(){
-        
+        if(!eSin.isEmpty()){
+            html.generarHTMLErroresSintacticos(eSin);
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay errores sintácticos");
+        }
     }
     
     public void generarHTMLSemanticos(){
-        
+        if(!eSem.isEmpty()){
+            html.generarHTMLErroresSemanticos(eSem);
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay errores semánticos");
+        }
     }
     
     public void generarHTMLTablaSimbolos(){
-        
+        if(tabla != null){
+            html.generarHTMLTablaSimbolos(tabla.getSimbolos());
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay tabla de símbolos");
+        }
     }
     
     public void generarHTMLAST(){
-        
+        if(programa != null){
+            html.generarHTMLAST(programa);
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay AST");
+        }
     }
     
 /*---------------------------------------------------------------------------------------*/

@@ -41,8 +41,7 @@ public class Main {
             System.out.println("Archivo seleccionado: "
                     + archivoSeleccionado.getAbsolutePath());
 
-            try (BufferedReader br = new BufferedReader(
-                    new FileReader(archivoSeleccionado))) {
+            try (BufferedReader br = new BufferedReader(new FileReader(archivoSeleccionado))) {
 
                 //abre archivos
                 AFD_JFlex lexer = new AFD_JFlex(br);

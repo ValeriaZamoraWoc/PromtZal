@@ -36,26 +36,41 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Errores l&#xe9;xicos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnErroresLexicosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="btnErroresSemanticos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Errores sem&#xe1;nticos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnErroresSemanticosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="btnErroresSintacticos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Errores sint&#xe1;cticos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnErroresSintacticosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="btnTablaSimbolos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tabla de s&#xed;mbolos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTablaSimbolosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="btnAST">
               <Properties>
                 <Property name="text" type="java.lang.String" value="AST"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnASTActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -93,8 +108,8 @@
                   <Group type="102" attributes="0">
                       <Component id="jScrollPane1" min="-2" pref="145" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="spEditor" min="-2" pref="801" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="spEditor" min="-2" pref="758" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel1" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -192,11 +207,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane2" pref="286" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" pref="344" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
-                  <Component id="btnExpmd" min="-2" pref="137" max="-2" attributes="0"/>
+                  <Component id="btnExpmd" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="btnExptxt" max="32767" attributes="0"/>
+                  <Component id="btnExptxt" min="-2" pref="166" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -223,6 +238,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextArea" name="txtPromtzal">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>

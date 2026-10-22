@@ -13,13 +13,14 @@ import AST.Agente;
 public class Simbolo {
     private String nombre;
     private String tipo;
-    private Agente agente;
+    private String agente;
     private int fila;
 
-    public Simbolo(String nombre, String tipo, Agente agente) {
+    public Simbolo(String nombre, String tipo, String agente, int fila) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.agente = agente;
+        this.fila= fila;
     }
 
     public String getNombre() {
@@ -30,7 +31,7 @@ public class Simbolo {
         return tipo;
     }
 
-    public Agente getAgente() {
+    public String getAgente() {
         return agente;
     }
 

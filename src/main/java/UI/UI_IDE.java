@@ -26,6 +26,12 @@ public class UI_IDE extends javax.swing.JFrame {
      */
     public UI_IDE() {
         initComponents();
+        btnCopiar.addActionListener(e -> txtEditor.copy());
+
+        btnCortar.addActionListener(e -> txtEditor.cut());
+
+        btnEliminar.addActionListener(e -> txtEditor.replaceSelection(""));
+        aplicarEsteticaDarkAcademia();
         gestorArchivos.setModel(modeloTree);
         
         gestorArchivos.addTreeSelectionListener(e -> {
@@ -116,6 +122,7 @@ public class UI_IDE extends javax.swing.JFrame {
         txtEditor.setRows(5);
         spEditor.setViewportView(txtEditor);
 
+        txtPromtzal.setEditable(false);
         txtPromtzal.setColumns(20);
         txtPromtzal.setRows(5);
         jScrollPane2.setViewportView(txtPromtzal);
@@ -128,11 +135,11 @@ public class UI_IDE extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(btnExpmd, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnExpmd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnExptxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnExptxt, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,18 +171,23 @@ public class UI_IDE extends javax.swing.JFrame {
         menuExportar.setText("Exportar HTML");
 
         btnErroresLexicos.setText("Errores léxicos");
+        btnErroresLexicos.addActionListener(this::btnErroresLexicosActionPerformed);
         menuExportar.add(btnErroresLexicos);
 
         btnErroresSemanticos.setText("Errores semánticos");
+        btnErroresSemanticos.addActionListener(this::btnErroresSemanticosActionPerformed);
         menuExportar.add(btnErroresSemanticos);
 
         btnErroresSintacticos.setText("Errores sintácticos");
+        btnErroresSintacticos.addActionListener(this::btnErroresSintacticosActionPerformed);
         menuExportar.add(btnErroresSintacticos);
 
         btnTablaSimbolos.setText("Tabla de símbolos");
+        btnTablaSimbolos.addActionListener(this::btnTablaSimbolosActionPerformed);
         menuExportar.add(btnTablaSimbolos);
 
         btnAST.setText("AST");
+        btnAST.addActionListener(this::btnASTActionPerformed);
         menuExportar.add(btnAST);
 
         menuBar.add(menuExportar);
@@ -194,7 +206,7 @@ public class UI_IDE extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(spEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 758, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -216,7 +228,875 @@ public class UI_IDE extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //abrir archivo y guardarlo como archivo actual
+    private void aplicarEsteticaDarkAcademia() {
+
+        // ============================================================
+        // PALETA DARK ACADEMIA
+        // ============================================================
+
+        java.awt.Color colorFondo =
+                new java.awt.Color(43, 39, 37);       // #2B2725
+
+        java.awt.Color colorPanel =
+                new java.awt.Color(52, 47, 44);       // #342F2C
+
+        java.awt.Color colorEditor =
+                new java.awt.Color(31, 29, 28);       // #1F1D1C
+
+        java.awt.Color colorToolbar =
+                new java.awt.Color(58, 52, 49);       // #3A3431
+
+        java.awt.Color colorBorde =
+                new java.awt.Color(91, 80, 72);       // #5B5048
+
+        java.awt.Color colorTexto =
+                new java.awt.Color(238, 228, 219);    // #EEE4DB
+
+        java.awt.Color colorAcento =
+                new java.awt.Color(225, 160, 164);    // #E1A0A4
+
+        java.awt.Color colorDorado =
+                new java.awt.Color(218, 181, 115);    // #DAB573
+
+        java.awt.Color colorTerminal =
+                new java.awt.Color(185, 196, 174);
+
+        // Colores para estados hover
+        java.awt.Color colorHoverToolbar =
+                new java.awt.Color(72, 64, 60);
+
+        java.awt.Color colorHoverMenu =
+                new java.awt.Color(72, 64, 60);
+
+        java.awt.Color colorHoverItem =
+                new java.awt.Color(82, 70, 65);
+
+        // Scrollbars
+        java.awt.Color colorScrollFondo =
+                new java.awt.Color(36, 33, 31);
+
+        java.awt.Color colorScrollThumb =
+                new java.awt.Color(91, 80, 72);
+
+        java.awt.Color colorScrollHover =
+                new java.awt.Color(116, 96, 87);
+
+
+        // ============================================================
+        // FUENTES
+        // ============================================================
+
+        java.awt.Font fuenteGeneral =
+                new java.awt.Font(
+                        "Segoe UI",
+                        java.awt.Font.PLAIN,
+                        13
+                );
+
+        java.awt.Font fuenteBoton =
+                new java.awt.Font(
+                        "Segoe UI",
+                        java.awt.Font.BOLD,
+                        13
+                );
+
+        java.awt.Font fuenteCodigo =
+                new java.awt.Font(
+                        "Consolas",
+                        java.awt.Font.PLAIN,
+                        14
+                );
+
+
+        // ============================================================
+        // VENTANA PRINCIPAL
+        // ============================================================
+
+        getContentPane().setBackground(colorFondo);
+
+
+        // ============================================================
+        // MENU BAR
+        // ============================================================
+
+        menuBar.setBackground(colorToolbar);
+        menuBar.setForeground(colorTexto);
+        menuBar.setOpaque(true);
+
+        menuBar.setUI(new javax.swing.plaf.basic.BasicMenuBarUI() {
+
+            @Override
+            public void paint(
+                    java.awt.Graphics g,
+                    javax.swing.JComponent c) {
+
+                g.setColor(colorToolbar);
+
+                g.fillRect(
+                        0,
+                        0,
+                        c.getWidth(),
+                        c.getHeight()
+                );
+            }
+        });
+        menuBar.setBorder(
+                javax.swing.BorderFactory.createMatteBorder(
+                        0,
+                        0,
+                        1,
+                        0,
+                        colorBorde
+                )
+        );
+
+
+        // ============================================================
+        // MENÚS
+        // ============================================================
+
+        for (int i = 0; i < menuBar.getMenuCount(); i++) {
+        javax.swing.JPopupMenu.setDefaultLightWeightPopupEnabled(false);
+            javax.swing.JMenu menu =
+                    menuBar.getMenu(i);
+
+            if (menu == null) {
+                continue;
+            }
+
+            menu.setBackground(colorToolbar);
+            menu.setForeground(colorTexto);
+            menu.setFont(fuenteGeneral);
+            menu.setOpaque(true);
+            javax.swing.JPopupMenu popup =
+                    menu.getPopupMenu();
+
+            popup.setBackground(colorPanel);
+            popup.setOpaque(true);
+
+            popup.setBorder(
+                    javax.swing.BorderFactory.createLineBorder(
+                            colorBorde,
+                            1
+                    )
+            );
+            menu.setUI(
+                    new javax.swing.plaf.basic.BasicMenuUI() {
+
+                        protected void paintBackground(
+                                java.awt.Graphics g,
+                                javax.swing.JMenu menu) {
+
+                            javax.swing.ButtonModel model =
+                                    menu.getModel();
+
+                            if (model.isArmed()
+                                    || model.isSelected()) {
+
+                                // ROSA DARK ACADEMIA
+                                g.setColor(
+                                        new java.awt.Color(
+                                                117,
+                                                70,
+                                                76
+                                        )
+                                );
+
+                            } else {
+
+                                // NORMAL
+                                g.setColor(colorToolbar);
+                            }
+
+                            g.fillRect(
+                                    0,
+                                    0,
+                                    menu.getWidth(),
+                                    menu.getHeight()
+                            );
+                        }
+                    }
+            );
+            menu.setBorder(
+                    javax.swing.BorderFactory.createEmptyBorder(
+                            5,
+                            10,
+                            5,
+                            10
+                    )
+            );
+
+
+            // --------------------------------------------------------
+            // ITEMS DEL MENÚ
+            // --------------------------------------------------------
+            for (int j = 0; j < menu.getItemCount(); j++) {
+
+                javax.swing.JMenuItem item =
+                        menu.getItem(j);
+
+                if (item == null) {
+                    continue;
+                }
+
+                item.setBackground(colorPanel);
+                item.setForeground(colorTexto);
+                item.setFont(fuenteGeneral);
+
+                item.setOpaque(true);
+
+                item.setBorder(
+                        javax.swing.BorderFactory.createEmptyBorder(
+                                7,
+                                14,
+                                7,
+                                14
+                        )
+                );
+
+                item.setUI(
+                        new javax.swing.plaf.basic.BasicMenuItemUI() {
+
+                            @Override
+                            protected void paintBackground(
+                                    java.awt.Graphics g,
+                                    javax.swing.JMenuItem menuItem,
+                                    java.awt.Color bgColor) {
+
+                                javax.swing.ButtonModel model =
+                                        menuItem.getModel();
+
+                                java.awt.Color fondo;
+
+                                if (model.isArmed() || model.isSelected()) {
+
+                                    // ROSA DARK ACADEMIA
+                                    fondo = new java.awt.Color(
+                                            117,
+                                            70,
+                                            76
+                                    );
+
+                                } else {
+
+                                    // FONDO NORMAL
+                                    fondo = colorPanel;
+                                }
+
+                                g.setColor(fondo);
+
+                                g.fillRect(
+                                        0,
+                                        0,
+                                        menuItem.getWidth(),
+                                        menuItem.getHeight()
+                                );
+                            }
+
+
+                            @Override
+                            protected void paintText(
+                                    java.awt.Graphics g,
+                                    javax.swing.JMenuItem menuItem,
+                                    java.awt.Rectangle textRect,
+                                    String text) {
+
+                                // Forzar manualmente el color
+                                g.setColor(colorTexto);
+
+                                g.setFont(menuItem.getFont());
+
+                                java.awt.FontMetrics fm =
+                                        g.getFontMetrics();
+
+                                int x = textRect.x;
+
+                                int y =
+                                        textRect.y
+                                        + fm.getAscent();
+
+                                g.drawString(
+                                        text,
+                                        x,
+                                        y
+                                );
+                            }
+                        }
+                );
+            }
+        }
+
+
+        // ============================================================
+        // TOOLBAR
+        // ============================================================
+
+        toolBar.setBackground(colorToolbar);
+        toolBar.setForeground(colorTexto);
+        toolBar.setOpaque(true);
+
+        toolBar.setFloatable(false);
+
+        /*
+         * Desactivamos el rollover de Swing porque es precisamente
+         * lo que provoca el fondo blanco en algunos Look & Feel.
+         */
+        toolBar.setRollover(false);
+
+        toolBar.setBorder(
+                javax.swing.BorderFactory.createEmptyBorder(
+                        5,
+                        8,
+                        5,
+                        8
+                )
+        );
+
+
+        // ============================================================
+        // BOTONES DE LA TOOLBAR
+        // ============================================================
+
+        javax.swing.JButton[] botonesToolBar = {
+            btnCompilar,
+            btnCortar,
+            btnCopiar,
+            btnEliminar
+        };
+
+        for (javax.swing.JButton btn : botonesToolBar) {
+
+            btn.setBackground(colorToolbar);
+            btn.setForeground(colorTexto);
+
+            btn.setFont(fuenteBoton);
+
+            btn.setOpaque(true);
+            btn.setContentAreaFilled(true);
+
+            btn.setFocusPainted(false);
+            btn.setFocusable(false);
+
+            btn.setBorderPainted(false);
+
+            /*
+             * MUY IMPORTANTE:
+             * evita el fondo blanco de rollover.
+             */
+            btn.setRolloverEnabled(false);
+
+            btn.setBorder(
+                    javax.swing.BorderFactory.createEmptyBorder(
+                            6,
+                            12,
+                            6,
+                            12
+                    )
+            );
+
+            btn.setCursor(
+                    new java.awt.Cursor(
+                            java.awt.Cursor.HAND_CURSOR
+                    )
+            );
+        }
+
+        // Compilar es el botón principal
+        btnCompilar.setForeground(colorAcento);
+
+
+        // ============================================================
+        // ÁRBOL DE ARCHIVOS
+        // ============================================================
+
+        gestorArchivos.setBackground(colorEditor);
+        gestorArchivos.setForeground(colorTexto);
+        gestorArchivos.setFont(fuenteGeneral);
+        gestorArchivos.setOpaque(true);
+
+        // Forzar colores del texto del árbol
+        javax.swing.tree.DefaultTreeCellRenderer renderer =
+                new javax.swing.tree.DefaultTreeCellRenderer();
+
+        renderer.setTextNonSelectionColor(colorTexto);
+        renderer.setTextSelectionColor(colorTexto);
+        renderer.setBackgroundNonSelectionColor(colorEditor);
+        renderer.setBackgroundSelectionColor(
+                new java.awt.Color(82, 70, 65)
+        );
+
+        renderer.setBorderSelectionColor(
+                new java.awt.Color(117, 85, 88)
+        );
+
+        gestorArchivos.setCellRenderer(renderer);
+
+        gestorArchivos.setOpaque(true);
+
+        gestorArchivos.setBorder(
+                javax.swing.BorderFactory.createEmptyBorder(
+                        8,
+                        8,
+                        8,
+                        8
+                )
+        );
+
+        jScrollPane1.setBackground(colorEditor);
+        jScrollPane1.setOpaque(true);
+
+        jScrollPane1.getViewport().setBackground(colorEditor);
+        jScrollPane1.getViewport().setOpaque(true);
+
+        jScrollPane1.setBorder(
+                javax.swing.BorderFactory.createLineBorder(
+                        colorBorde,
+                        1
+                )
+        );
+
+
+        // ============================================================
+        // EDITOR, PROMPT Y TERMINAL
+        // ============================================================
+
+        javax.swing.JScrollPane[] scrolls = {
+            spEditor,
+            jScrollPane2,
+            jScrollPane3
+        };
+
+        javax.swing.text.JTextComponent[] textos = {
+            txtEditor,
+            txtPromtzal,
+            txtTerminal
+        };
+
+
+        for (int i = 0; i < scrolls.length; i++) {
+
+            javax.swing.JScrollPane scroll =
+                    scrolls[i];
+
+            javax.swing.text.JTextComponent text =
+                    textos[i];
+
+
+            // --------------------------------------------------------
+            // ÁREA DE TEXTO
+            // --------------------------------------------------------
+
+            text.setBackground(colorEditor);
+
+            text.setForeground(
+                    i == 1
+                            ? colorDorado
+                            : colorTexto
+            );
+
+            text.setCaretColor(colorAcento);
+
+            text.setFont(fuenteCodigo);
+
+            text.setOpaque(true);
+
+            text.setSelectionColor(
+                    new java.awt.Color(92, 67, 67)
+            );
+
+            text.setSelectedTextColor(colorTexto);
+
+            text.setBorder(
+                    javax.swing.BorderFactory.createEmptyBorder(
+                            10,
+                            12,
+                            10,
+                            12
+                    )
+            );
+
+
+            // --------------------------------------------------------
+            // SCROLLPANE
+            // --------------------------------------------------------
+
+            scroll.setBackground(colorEditor);
+            scroll.setOpaque(true);
+
+            scroll.getViewport().setBackground(colorEditor);
+            scroll.getViewport().setOpaque(true);
+
+            scroll.setBorder(
+                    javax.swing.BorderFactory.createLineBorder(
+                            colorBorde,
+                            1
+                    )
+            );
+        }
+
+
+        // ============================================================
+        // PANEL DERECHO
+        // ============================================================
+
+        jPanel1.setBackground(colorPanel);
+        jPanel1.setForeground(colorTexto);
+        jPanel1.setOpaque(true);
+
+        jPanel1.setBorder(
+                javax.swing.BorderFactory.createCompoundBorder(
+                        new BordeRedondeado(
+                                colorBorde,
+                                18,
+                                1
+                        ),
+                        javax.swing.BorderFactory.createEmptyBorder(
+                                8,
+                                8,
+                                8,
+                                8
+                        )
+                )
+        );
+
+
+        // ============================================================
+        // BOTONES DE EXPORTACIÓN
+        // ============================================================
+
+        javax.swing.JButton[] botonesExportar = {
+            btnExpmd,
+            btnExptxt
+        };
+
+        for (javax.swing.JButton btn : botonesExportar) {
+
+            btn.setBackground(colorPanel);
+            btn.setForeground(colorAcento);
+
+            btn.setFont(fuenteBoton);
+
+            btn.setOpaque(true);
+            btn.setContentAreaFilled(true);
+
+            btn.setFocusPainted(false);
+            btn.setFocusable(false);
+
+            btn.setRolloverEnabled(false);
+
+            btn.setBorder(
+                    new BordeRedondeado(
+                            new java.awt.Color(117, 85, 88),
+                            12,
+                            1
+                    )
+            );
+
+            btn.setCursor(
+                    new java.awt.Cursor(
+                            java.awt.Cursor.HAND_CURSOR
+                    )
+            );
+        }
+
+
+        // ============================================================
+        // PROMPT
+        // ============================================================
+
+        txtPromtzal.setBackground(colorEditor);
+        txtPromtzal.setForeground(colorDorado);
+
+
+        // ============================================================
+        // TERMINAL
+        // ============================================================
+
+        txtTerminal.setBackground(colorEditor);
+        txtTerminal.setForeground(colorTerminal);
+
+
+        // ============================================================
+        // SCROLLBARS PERSONALIZADAS
+        // ============================================================
+
+        javax.swing.JScrollPane[] todosLosScrolls = {
+            jScrollPane1,
+            spEditor,
+            jScrollPane2,
+            jScrollPane3
+        };
+
+
+        for (javax.swing.JScrollPane scroll : todosLosScrolls) {
+
+            // --------------------------------------------------------
+            // BARRA VERTICAL
+            // --------------------------------------------------------
+
+            javax.swing.JScrollBar vertical =
+                    scroll.getVerticalScrollBar();
+
+            vertical.setBackground(colorScrollFondo);
+            vertical.setOpaque(true);
+            vertical.setBorder(null);
+
+            vertical.setUI(
+                    new javax.swing.plaf.basic.BasicScrollBarUI() {
+
+                        @Override
+                        protected void configureScrollBarColors() {
+
+                            this.trackColor =
+                                    colorScrollFondo;
+
+                            this.thumbColor =
+                                    colorScrollThumb;
+                        }
+
+
+                        @Override
+                        protected javax.swing.JButton createDecreaseButton(
+                                int orientation) {
+
+                            return crearBotonScroll();
+                        }
+
+
+                        @Override
+                        protected javax.swing.JButton createIncreaseButton(
+                                int orientation) {
+
+                            return crearBotonScroll();
+                        }
+
+
+                        @Override
+                        protected void paintTrack(
+                                java.awt.Graphics g,
+                                javax.swing.JComponent c,
+                                java.awt.Rectangle r) {
+
+                            java.awt.Graphics2D g2 =
+                                    (java.awt.Graphics2D) g.create();
+
+                            g2.setColor(colorScrollFondo);
+
+                            g2.fillRect(
+                                    r.x,
+                                    r.y,
+                                    r.width,
+                                    r.height
+                            );
+
+                            g2.dispose();
+                        }
+
+
+                        @Override
+                        protected void paintThumb(
+                                java.awt.Graphics g,
+                                javax.swing.JComponent c,
+                                java.awt.Rectangle r) {
+
+                            if (r.width <= 0
+                                    || r.height <= 0) {
+                                return;
+                            }
+
+                            java.awt.Graphics2D g2 =
+                                    (java.awt.Graphics2D) g.create();
+
+                            g2.setRenderingHint(
+                                    java.awt.RenderingHints.KEY_ANTIALIASING,
+                                    java.awt.RenderingHints.VALUE_ANTIALIAS_ON
+                            );
+
+                            java.awt.Color thumbColor =
+                                    colorScrollThumb;
+
+                            if (c.getMousePosition() != null) {
+                                thumbColor =
+                                        colorScrollHover;
+                            }
+
+                            g2.setColor(thumbColor);
+
+                            g2.fillRoundRect(
+                                    r.x + 2,
+                                    r.y + 2,
+                                    r.width - 4,
+                                    r.height - 4,
+                                    8,
+                                    8
+                            );
+
+                            g2.dispose();
+                        }
+
+
+                        private javax.swing.JButton crearBotonScroll() {
+
+                            javax.swing.JButton boton =
+                                    new javax.swing.JButton();
+
+                            boton.setPreferredSize(
+                                    new java.awt.Dimension(0, 0)
+                            );
+
+                            boton.setMinimumSize(
+                                    new java.awt.Dimension(0, 0)
+                            );
+
+                            boton.setMaximumSize(
+                                    new java.awt.Dimension(0, 0)
+                            );
+
+                            boton.setOpaque(false);
+                            boton.setContentAreaFilled(false);
+                            boton.setBorderPainted(false);
+                            boton.setFocusable(false);
+
+                            return boton;
+                        }
+                    }
+            );
+
+
+            // --------------------------------------------------------
+            // BARRA HORIZONTAL
+            // --------------------------------------------------------
+
+            javax.swing.JScrollBar horizontal =
+                    scroll.getHorizontalScrollBar();
+
+            horizontal.setBackground(colorScrollFondo);
+            horizontal.setOpaque(true);
+            horizontal.setBorder(null);
+
+            horizontal.setUI(
+                    new javax.swing.plaf.basic.BasicScrollBarUI() {
+
+                        @Override
+                        protected void configureScrollBarColors() {
+
+                            this.trackColor =
+                                    colorScrollFondo;
+
+                            this.thumbColor =
+                                    colorScrollThumb;
+                        }
+
+
+                        @Override
+                        protected javax.swing.JButton createDecreaseButton(
+                                int orientation) {
+
+                            return crearBotonScroll();
+                        }
+
+
+                        @Override
+                        protected javax.swing.JButton createIncreaseButton(
+                                int orientation) {
+
+                            return crearBotonScroll();
+                        }
+
+
+                        @Override
+                        protected void paintTrack(
+                                java.awt.Graphics g,
+                                javax.swing.JComponent c,
+                                java.awt.Rectangle r) {
+
+                            java.awt.Graphics2D g2 =
+                                    (java.awt.Graphics2D) g.create();
+
+                            g2.setColor(colorScrollFondo);
+
+                            g2.fillRect(
+                                    r.x,
+                                    r.y,
+                                    r.width,
+                                    r.height
+                            );
+
+                            g2.dispose();
+                        }
+
+
+                        @Override
+                        protected void paintThumb(
+                                java.awt.Graphics g,
+                                javax.swing.JComponent c,
+                                java.awt.Rectangle r) {
+
+                            if (r.width <= 0
+                                    || r.height <= 0) {
+                                return;
+                            }
+
+                            java.awt.Graphics2D g2 =
+                                    (java.awt.Graphics2D) g.create();
+
+                            g2.setRenderingHint(
+                                    java.awt.RenderingHints.KEY_ANTIALIASING,
+                                    java.awt.RenderingHints.VALUE_ANTIALIAS_ON
+                            );
+
+                            g2.setColor(colorScrollThumb);
+
+                            g2.fillRoundRect(
+                                    r.x + 2,
+                                    r.y + 2,
+                                    r.width - 4,
+                                    r.height - 4,
+                                    8,
+                                    8
+                            );
+
+                            g2.dispose();
+                        }
+
+
+                        private javax.swing.JButton crearBotonScroll() {
+
+                            javax.swing.JButton boton =
+                                    new javax.swing.JButton();
+
+                            boton.setPreferredSize(
+                                    new java.awt.Dimension(0, 0)
+                            );
+
+                            boton.setMinimumSize(
+                                    new java.awt.Dimension(0, 0)
+                            );
+
+                            boton.setMaximumSize(
+                                    new java.awt.Dimension(0, 0)
+                            );
+
+                            boton.setOpaque(false);
+                            boton.setContentAreaFilled(false);
+                            boton.setBorderPainted(false);
+                            boton.setFocusable(false);
+
+                            return boton;
+                        }
+                    }
+            );
+        }
+
+
+        // ============================================================
+        // ACTUALIZAR INTERFAZ
+        // ============================================================
+
+        getContentPane().revalidate();
+        getContentPane().repaint();
+    }
+    
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
         File archivo = ide.cargarArchivo();
         if (archivo != null) {
@@ -226,11 +1106,11 @@ public class UI_IDE extends javax.swing.JFrame {
             txtEditor.setText(ide.leerArchivo(archivo));
 
             DefaultMutableTreeNode nodo =new DefaultMutableTreeNode(archivo) {
-                        @Override
-                        public String toString() {
-                            return archivo.getName();
-                        }
-                    };
+                @Override
+                public String toString() {
+                    return archivo.getName();
+                }
+            };
 
             raiz.add(nodo);
             modeloTree.reload();
@@ -251,15 +1131,35 @@ public class UI_IDE extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilarActionPerformed
+        txtPromtzal.setText("");
         String comp = ide.compilar(txtEditor.getText());
         txtTerminal.setText(comp);
-        String p = ide.getPromtzal().getPromtzal();
-        if(ide.getPromtzal() == null || p.isBlank()|| p.isEmpty()){
+        if(ide.getPromtzal() == null || ide.getPromtzal().getPromtzal().isBlank()|| ide.getPromtzal().getPromtzal().isEmpty()){
             txtPromtzal.setText("Errores en el archivo.\nSolucione antes para generar PromtZal");
         }else{
-            txtPromtzal.setText(p);
+            txtPromtzal.setText(ide.getPromtzal().getPromtzal());
         }
     }//GEN-LAST:event_btnCompilarActionPerformed
+
+    private void btnErroresLexicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErroresLexicosActionPerformed
+        ide.generarHTMLLexicos();
+    }//GEN-LAST:event_btnErroresLexicosActionPerformed
+
+    private void btnErroresSemanticosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErroresSemanticosActionPerformed
+        ide.generarHTMLSemanticos();
+    }//GEN-LAST:event_btnErroresSemanticosActionPerformed
+
+    private void btnErroresSintacticosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnErroresSintacticosActionPerformed
+        ide.generarHTMLSintacticos();
+    }//GEN-LAST:event_btnErroresSintacticosActionPerformed
+
+    private void btnTablaSimbolosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTablaSimbolosActionPerformed
+        ide.generarHTMLTablaSimbolos();
+    }//GEN-LAST:event_btnTablaSimbolosActionPerformed
+
+    private void btnASTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnASTActionPerformed
+        ide.generarHTMLAST();
+    }//GEN-LAST:event_btnASTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -314,4 +1214,177 @@ public class UI_IDE extends javax.swing.JFrame {
     private javax.swing.JTextArea txtPromtzal;
     private javax.swing.JTextArea txtTerminal;
     // End of variables declaration//GEN-END:variables
+
+    private static class BordeRedondeado extends javax.swing.border.AbstractBorder {
+
+        private final java.awt.Color color;
+        private final int radio;
+        private final int grosor;
+
+        public BordeRedondeado(java.awt.Color color, int radio, int grosor) {
+            this.color = color;
+            this.radio = radio;
+            this.grosor = grosor;
+        }
+
+        @Override
+        public void paintBorder(
+                java.awt.Component c,
+                java.awt.Graphics g,
+                int x,
+                int y,
+                int width,
+                int height) {
+
+            if (width <= 0 || height <= 0) {
+                return;
+            }
+
+            java.awt.Graphics2D g2 =
+                    (java.awt.Graphics2D) g.create();
+
+            g2.setRenderingHint(
+                    java.awt.RenderingHints.KEY_ANTIALIASING,
+                    java.awt.RenderingHints.VALUE_ANTIALIAS_ON
+            );
+
+            g2.setRenderingHint(
+                    java.awt.RenderingHints.KEY_RENDERING,
+                    java.awt.RenderingHints.VALUE_RENDER_QUALITY
+            );
+
+            g2.setColor(color);
+            g2.setStroke(
+                    new java.awt.BasicStroke(
+                            grosor,
+                            java.awt.BasicStroke.CAP_ROUND,
+                            java.awt.BasicStroke.JOIN_ROUND
+                    )
+            );
+
+            float offset = grosor / 2.0f;
+
+            g2.drawRoundRect(
+                    Math.round(x + offset),
+                    Math.round(y + offset),
+                    Math.round(width - grosor),
+                    Math.round(height - grosor),
+                    radio,
+                    radio
+            );
+
+            g2.dispose();
+        }
+
+        @Override
+        public java.awt.Insets getBorderInsets(
+                java.awt.Component c) {
+
+            return getBorderInsets(c, new java.awt.Insets(0, 0, 0, 0));
+        }
+
+        @Override
+        public java.awt.Insets getBorderInsets(
+                java.awt.Component c,
+                java.awt.Insets insets) {
+
+            int espacio = grosor + 2;
+
+            insets.top = espacio;
+            insets.left = espacio;
+            insets.bottom = espacio;
+            insets.right = espacio;
+
+            return insets;
+        }
+    }
+
+    private static class PanelCute extends javax.swing.JPanel {
+
+        private final java.awt.Color fondo;
+        private final java.awt.Color borde;
+        private final int radio;
+
+        public PanelCute(
+                java.awt.Color fondo,
+                java.awt.Color borde) {
+
+            this(fondo, borde, 18);
+        }
+
+        public PanelCute(
+                java.awt.Color fondo,
+                java.awt.Color borde,
+                int radio) {
+
+            this.fondo = fondo;
+            this.borde = borde;
+            this.radio = radio;
+
+            setOpaque(false);
+
+            setBorder(
+                    javax.swing.BorderFactory.createEmptyBorder(
+                            10,
+                            10,
+                            10,
+                            10
+                    )
+            );
+        }
+
+        @Override
+        protected void paintComponent(
+                java.awt.Graphics g) {
+
+            java.awt.Graphics2D g2 =
+                    (java.awt.Graphics2D) g.create();
+
+            g2.setRenderingHint(
+                    java.awt.RenderingHints.KEY_ANTIALIASING,
+                    java.awt.RenderingHints.VALUE_ANTIALIAS_ON
+            );
+
+            g2.setRenderingHint(
+                    java.awt.RenderingHints.KEY_RENDERING,
+                    java.awt.RenderingHints.VALUE_RENDER_QUALITY
+            );
+
+            // Fondo
+            g2.setColor(fondo);
+
+            g2.fillRoundRect(
+                    0,
+                    0,
+                    getWidth() - 1,
+                    getHeight() - 1,
+                    radio,
+                    radio
+            );
+
+            // Borde
+            g2.setColor(borde);
+
+            g2.setStroke(
+                    new java.awt.BasicStroke(
+                            1.5f,
+                            java.awt.BasicStroke.CAP_ROUND,
+                            java.awt.BasicStroke.JOIN_ROUND
+                    )
+            );
+
+            g2.drawRoundRect(
+                    1,
+                    1,
+                    getWidth() - 3,
+                    getHeight() - 3,
+                    radio,
+                    radio
+            );
+
+            g2.dispose();
+
+            super.paintComponent(g);
+        }
+    }
 }

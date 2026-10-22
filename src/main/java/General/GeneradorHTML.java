@@ -326,6 +326,7 @@ public class GeneradorHTML {
         html.append("<th>Nombre</th>");
         html.append("<th>Tipo</th>");
         html.append("<th>Agente</th>");
+        html.append("<th>Linea</th>");
         html.append("</tr>");
         html.append("</thead>");
         html.append("<tbody>");
@@ -337,6 +338,7 @@ public class GeneradorHTML {
             html.append("<td class='nombre'>").append(simbolo.getNombre()).append("</td>");
             html.append("<td class='tipo'>").append(simbolo.getTipo()).append("</td>");
             html.append("<td class='agente'>").append(simbolo.getAgente()).append("</td>"); // Asegúrate de que Agente tenga un toString() adecuado o usa un getter específico
+            html.append("<td class='linea'>").append(simbolo.getFila()).append("</td>");
             html.append("</tr>");
         }
 

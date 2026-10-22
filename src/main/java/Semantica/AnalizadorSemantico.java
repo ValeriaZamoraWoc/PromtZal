@@ -42,7 +42,8 @@ public class AnalizadorSemantico {
             String nombre = a.getId();
             String tipo= "Agente";
             Agente agente = a;
-            Simbolo simbolo = new Simbolo(nombre, tipo, agente);
+            int f = a.getFila();
+            Simbolo simbolo = new Simbolo(nombre, tipo, agente.getId(), f);
             tabla.registrar(simbolo);
             
             registrarVariables(a);
@@ -58,7 +59,8 @@ public class AnalizadorSemantico {
                 String nombre = v.getId();
                 String tipo= "Variable";
                 Agente agente = a;
-                Simbolo simbolo = new Simbolo(nombre, tipo, agente);
+                int f = v.getFila();
+                Simbolo simbolo = new Simbolo(nombre, tipo, agente.getId(), f);
                 tabla.registrar(simbolo);
             }else{
                 ErrorSemantico e = new ErrorSemantico(v.getId(), "La variable ya estaba definida",
@@ -96,8 +98,9 @@ public class AnalizadorSemantico {
                 String nombre = c.getId();
                 String tipo= "Resultado";
                 Agente agente = a;
+                int fila = c.getFila();
 
-                Simbolo simbolo = new Simbolo(nombre, tipo, agente);
+                Simbolo simbolo = new Simbolo(nombre, tipo, agente.getId(),fila);
                 tabla.registrar(simbolo);
             }else{
                 ErrorSemantico e = new ErrorSemantico(c.getId(), "La variable ya estaba definida",
