@@ -249,17 +249,11 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Exportar .md"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExpmdActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnExptxt">
           <Properties>
             <Property name="text" type="java.lang.String" value="Exportar .txt"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExptxtActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

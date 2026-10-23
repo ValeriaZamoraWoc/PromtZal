@@ -128,10 +128,8 @@ public class UI_IDE extends javax.swing.JFrame {
         jScrollPane2.setViewportView(txtPromtzal);
 
         btnExpmd.setText("Exportar .md");
-        btnExpmd.addActionListener(this::btnExpmdActionPerformed);
 
         btnExptxt.setText("Exportar .txt");
-        btnExptxt.addActionListener(this::btnExptxtActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -1162,14 +1160,6 @@ public class UI_IDE extends javax.swing.JFrame {
     private void btnASTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnASTActionPerformed
         ide.generarHTMLAST();
     }//GEN-LAST:event_btnASTActionPerformed
-
-    private void btnExpmdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExpmdActionPerformed
-        ide.generarPromtZal(".md");
-    }//GEN-LAST:event_btnExpmdActionPerformed
-
-    private void btnExptxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExptxtActionPerformed
-        ide.generarPromtZal(".txt");
-    }//GEN-LAST:event_btnExptxtActionPerformed
 
     /**
      * @param args the command line arguments
