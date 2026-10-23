@@ -11,7 +11,14 @@ import AST.Directiva;
 import AST.Programa;
 import AST.Termino.Termino;
 import AST.Variable;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -180,5 +187,47 @@ public class GeneradorPromtZal {
     
     public String getPromtzal(){
         return promtzal.toString();
+    }
+    
+    public void archivoPromtzal(String t){
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+
+        String fechaHora =
+                LocalDateTime.now().format(formatter);
+
+        String nombreArchivoGuardar ="PromtZal" + fechaHora +t;
+        boolean guardadoExitoso = false;
+
+        try (FileWriter writer = new FileWriter(nombreArchivoGuardar)) {
+            writer.write(promtzal.toString());
+            guardadoExitoso = true;
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al guardar el promtzal: " + nombreArchivoGuardar);
+        }
+
+        if (guardadoExitoso) {
+            JOptionPane.showMessageDialog(null, "Promtzal guardado como: " + nombreArchivoGuardar);
+            abrirArchivo(nombreArchivoGuardar);
+        }
+    }
+    
+    private void abrirArchivo(String nombre) {
+        try {
+            File archivoPromtzal = new File(nombre); 
+
+            if (archivoPromtzal.exists()) {
+                if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+                    Desktop.getDesktop().open(archivoPromtzal);
+                } else {
+                    JOptionPane.showMessageDialog(null, "La función de abrir archivos no está soportada en este sistema.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "El archivo promtZal no existe: " + archivoPromtzal.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al intentar abrir el archivo promtZal: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

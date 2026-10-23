@@ -253,6 +253,14 @@ public class IDE {
         }
     }
     
+    public void generarPromtZal(String t){
+        if(promtzal != null){
+            promtzal.archivoPromtzal(t);
+        }else{
+            JOptionPane.showMessageDialog(null,"No hay promtZal para generar");
+        }
+    }
+    
 /*---------------------------------------------------------------------------------------*/
     
     public File getArchivoActual() {
